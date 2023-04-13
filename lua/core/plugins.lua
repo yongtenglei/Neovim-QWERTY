@@ -47,40 +47,48 @@ return require("packer").startup(function(use)
   use("nvim-lua/popup.nvim")  -- An implementation of the Popup API from vim in Neovim
   use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 
+  -- little things make life better
   use({ "ethanholz/nvim-lastplace" })
+  use({ "jiangmiao/auto-pairs" })
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+  })
+  use({ "lukas-reineke/indent-blankline.nvim" })
+  use({ "phaazon/hop.nvim", branch = "v2" }) --rv2' optional but strongly recommended
 
+  -- helpful if you use fcitx
+  use({ "h-hg/fcitx.nvim" })
+
+  -- ctag
+  use({ "stevearc/aerial.nvim" })
+
+  -- favorite comment plugin
+  -- comment: <leader>cc un-comment: <leader>cu
+  use({ "scrooloose/nerdcommenter" })
+
+  -- basic rice
   use({ "nvim-lualine/lualine.nvim" })
-
   use({ "akinsho/bufferline.nvim" })
-
   use({ "kyazdani42/nvim-web-devicons" })
 
+  -- file manager
   use({
     "kyazdani42/nvim-tree.lua",
     tag = "nightly",
   })
 
-  use({ "lukas-reineke/indent-blankline.nvim" })
-
-  -- 注释 <leader>cc 反注释 <leader>cu
-  use({ "scrooloose/nerdcommenter" })
-
   use({ "BurntSushi/ripgrep" }) --requires
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
   use({ "p00f/nvim-ts-rainbow" })
-  -- requires
+
+  -- telescope
   use({
     "nvim-telescope/telescope-fzf-native.nvim",
     run =
     "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   })
   use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/plenary.nvim" } } })
-
-  use({ "phaazon/hop.nvim", branch = "v2" }) --rv2' optional but strongly recommended
-
-  use({ "NvChad/nvim-colorizer.lua" })
-
-  use({ "jiangmiao/auto-pairs" })
 
   -- lsp
   use({ "williamboman/mason.nvim" })
@@ -100,6 +108,9 @@ return require("packer").startup(function(use)
   use({ "ray-x/cmp-treesitter" })
   use({ "onsails/lspkind.nvim" })
 
+  -- auto format and other stuff
+  use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim" } })
+
   -- languages
   use({ "mfussenegger/nvim-dap" })
   use({ "theHamsta/nvim-dap-virtual-text" })
@@ -114,12 +125,9 @@ return require("packer").startup(function(use)
   -- toggle term
   use({ "akinsho/toggleterm.nvim", tag = "*" })
 
-  use({ "j-hui/fidget.nvim" })
+  use({ "NvChad/nvim-colorizer.lua" })
 
-  use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim" } })
-
-  use({ "h-hg/fcitx.nvim" })
-
+  -- markdown support
   use({ "godlygeek/tabular", ft = { "markdown" } }) -- requires
   use({ "plasticboy/vim-markdown", ft = { "markdown" } })
   use({
@@ -130,17 +138,12 @@ return require("packer").startup(function(use)
   })
   use({ "dhruvasagar/vim-table-mode" })
 
-  use({ "mbbill/undotree" })
-
   use({ "lervag/vimtex" })
 
+  -- dashboard
   use({ "goolord/alpha-nvim" })
 
   use({ "mg979/vim-visual-multi" })
-
-  use({ "chentoast/marks.nvim" })
-
-  use({ "stevearc/aerial.nvim" })
 
   -- themes
   use({
@@ -154,17 +157,7 @@ return require("packer").startup(function(use)
     "Shatur/neovim-ayu",
   })
 
-  -- surround
-  use({
-    "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-  })
-
-  -- translator
-  --use({ "voldikss/vim-translator" })
-
   -- benchmark
-  use({ "dstein64/vim-startuptime" })
   use({ "lewis6991/impatient.nvim" })
 
   -- UI
@@ -173,6 +166,7 @@ return require("packer").startup(function(use)
   use({ "rcarriga/nvim-notify" })
   use({ "petertriho/nvim-scrollbar" })
   use({ "folke/todo-comments.nvim" })
+  use({ "j-hui/fidget.nvim" })
 
   -- with Tmux
   use({ "christoomey/vim-tmux-navigator" })
