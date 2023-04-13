@@ -1,0 +1,17 @@
+{
+  "fmt.Println": {
+    "prefix": "fn",
+    "body": ["fmt.Println(${1:})${0}"],
+    "description": "fmt.Println"
+  },
+  "handle error": {
+    "prefix": "eh",
+    "body": ["if err != nil {", "  ${1:}", "}", "${0}"],
+    "description": "handle error"
+  },
+  "main": {
+    "prefix": "main",
+    "body": ["func main() {", "  ${0}", "}"],
+    "description": "main"
+  }
+}

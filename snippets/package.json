@@ -1,0 +1,28 @@
+{
+  "name": "rey-snippets",
+  "engines": {
+    "vscode": "v0.0.1"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "all"
+        ],
+        "path": "./rey-snippets/global.json"
+      },
+      {
+        "language": "markdown",
+        "path": "./rey-snippets/markdown.json"
+      },
+      {
+        "language": "lua",
+        "path": "./rey-snippets/lua.json"
+      },
+      {
+        "language": "go",
+        "path": "./rey-snippets/go.json"
+      }
+    ]
+  }
+}
