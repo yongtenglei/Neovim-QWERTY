@@ -108,6 +108,9 @@ return require("packer").startup(function(use)
   use({ "ray-x/cmp-treesitter" })
   use({ "onsails/lspkind.nvim" })
 
+  -- lsp signature
+  use({ "ray-x/lsp_signature.nvim" })
+
   -- auto format and other stuff
   use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
@@ -125,7 +128,7 @@ return require("packer").startup(function(use)
   -- toggle term
   use({ "akinsho/toggleterm.nvim", tag = "*" })
 
-  use({ "NvChad/nvim-colorizer.lua" })
+  use({ "norcalli/nvim-colorizer.lua" })
 
   -- markdown support
   use({ "godlygeek/tabular", ft = { "markdown" } }) -- requires
