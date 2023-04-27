@@ -94,9 +94,9 @@ vim.keymap.set("n", "zc", ":lclose<cr>", opts)
 
 -- refersh buffer
 local function refreshBuf()
-	vim.cmd("set noconfirm")
-	vim.cmd("bufdo e !")
-	vim.cmd("set confirm")
+  vim.cmd("set noconfirm")
+  vim.cmd("bufdo e !")
+  vim.cmd("set confirm")
 end
 
 vim.keymap.set("n", "<leader>rb", refreshBuf)
