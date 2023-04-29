@@ -1,5 +1,3 @@
-require("impatient")
-
 require("core.settings")
 require("core.keymaps")
 
@@ -13,6 +11,8 @@ require("configs.theme.ayu").config()
 
 -- require("configs.notify").config()
 -- require("configs.noice").config()
+--[[
+
 require("configs.alpha").config()
 require("configs.nvimtree").config()
 require("configs.treesitter").config()
@@ -38,3 +38,6 @@ require("configs.aerial").config()
 
 -- require("configs.dap").config()
 require("configs.gopher").config()
+
+
+]]
