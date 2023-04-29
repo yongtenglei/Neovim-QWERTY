@@ -148,7 +148,12 @@ return lazy.setup({
       { "f3fora/cmp-spell" },
       { "hrsh7th/cmp-calc" },
       { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
-      { "L3MON4D3/LuaSnip" },      -- Snippets plugin
+      {
+        "L3MON4D3/LuaSnip",
+        config = function()
+          require("configs.luasnip").config()
+        end,
+      }, -- Snippets plugin
       { "rafamadriz/friendly-snippets" },
       { "ray-x/cmp-treesitter" },
       { "onsails/lspkind.nvim" },
@@ -290,6 +295,13 @@ return lazy.setup({
     end,
   },
 
+  -- which-key
+  {
+    "folke/which-key.nvim",
+    config = function()
+      require("configs.which-key").config()
+    end,
+  },
   -- with Tmux
   {
     "christoomey/vim-tmux-navigator",
