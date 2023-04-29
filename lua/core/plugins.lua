@@ -302,6 +302,15 @@ return lazy.setup({
       require("configs.which-key").config()
     end,
   },
+
+  -- marks
+  {
+    "chentoast/marks.nvim",
+    config = function()
+      require("configs.marks").config()
+    end,
+  },
+
   -- with Tmux
   {
     "christoomey/vim-tmux-navigator",
