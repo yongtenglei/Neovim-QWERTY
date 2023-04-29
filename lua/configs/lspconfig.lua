@@ -1,8 +1,6 @@
 local M = {}
 function M.config()
 	--------------------------------nvim-cmp------------------------
-	--local capabilities = vim.lsp.protocol.make_client_capabilities()
-	--capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 	-- luasnip setup
@@ -234,6 +232,7 @@ function M.config()
 	--sign({ name = "DiagnosticSignInfo", text = "" })
 
 	vim.diagnostic.config({
+		--virtual_text = true,
 		virtual_text = false,
 		severity_sort = true,
 		signs = true,
@@ -254,6 +253,7 @@ function M.config()
 
 	--------------------------------lspconfig-----------------------
 	local lspconfig = require("lspconfig")
+	local util = require("lspconfig/util")
 
 	-- Mappings.
 	-- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -301,7 +301,6 @@ function M.config()
 
 	local servers = {
 		"clangd",
-		"rust_analyzer",
 		"pyright",
 		"lua_ls",
 		"cmake",
@@ -315,13 +314,8 @@ function M.config()
 		"yamlls",
 		"quick_lint_js",
 	}
+
 	for _, lsp in pairs(servers) do
-		if lsp == "rust_analyzer" then
-			lspconfig[lsp].setup({
-				on_attach = on_attach,
-				flags = lsp_flags,
-			})
-		end
 		lspconfig[lsp].setup({
 			on_attach = on_attach,
 			flags = lsp_flags,

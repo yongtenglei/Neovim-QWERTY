@@ -12,6 +12,7 @@ function M.config()
     formatting.stylua,
     formatting.goimports,
     formatting.gofumpt,
+    formatting.rustfmt,
 
     diagnostics.flake8,
     diagnostics.pylint,
