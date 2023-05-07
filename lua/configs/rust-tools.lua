@@ -44,7 +44,8 @@ function M.config()
 	rt.setup({
 		server = {
 			on_attach = on_attach,
-			capabilities = capabilities,
+			-- already given by lspconfig
+			--capabilities = capabilities,
 			root_dir = util.root_pattern("Cargo.toml"),
 			settings = {
 				["rust_analyzer"] = {
