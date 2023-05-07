@@ -5,7 +5,8 @@ function M.config()
 		-- This setting has no relation with the `automatic_installation` setting.
 		ensure_installed = {
 			"lua_ls",
-			"rust_analyzer",
+			-- use rustup instead install this directly
+			--"rust_analyzer",
 			"clangd",
 			"cmake",
 			"cssls",
@@ -16,11 +17,11 @@ function M.config()
 			"ltex",
 			"marksman",
 			"pyright",
-			"r_language_server",
+			--"r_language_server",
 			"sqlls",
 			"taplo",
 			"vimls",
-			"volar",
+			"vuels",
 			"yamlls",
 		},
 		-- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.

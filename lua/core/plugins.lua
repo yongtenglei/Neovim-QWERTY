@@ -153,8 +153,10 @@ return lazy.setup({
 				config = function()
 					require("configs.luasnip").config()
 				end,
+				dependencies = {
+					{ "rafamadriz/friendly-snippets" },
+				},
 			}, -- Snippets plugin
-			{ "rafamadriz/friendly-snippets" },
 			{ "ray-x/cmp-treesitter" },
 			{ "onsails/lspkind.nvim" },
 		},
