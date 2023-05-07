@@ -299,18 +299,19 @@ function M.config()
 	local lsp_defaults = lspconfig.util.default_config
 	lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
 
+	-- rust will be handle in the other way
 	local servers = {
 		"clangd",
 		"pyright",
 		"lua_ls",
 		"cmake",
 		"cssls",
+		"vuels",
 		"dockerls",
 		"gopls",
 		"html",
 		"jsonls",
 		"sqlls",
-		"volar",
 		"yamlls",
 		"quick_lint_js",
 	}

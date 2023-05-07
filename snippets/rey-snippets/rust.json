@@ -1,0 +1,9 @@
+{
+  "derive Debug": {
+    "prefix": "derbug",
+    "body": [
+      "#[derive(Debug)]"
+    ],
+    "description": "derive Debug"
+  }
+}
