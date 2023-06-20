@@ -16,7 +16,8 @@ let g:mkdp_open_to_the_world = 0
 let g:mkdp_open_ip = ''
 " specify browser to open preview page
 " default: ''
-let g:mkdp_browser = 'google-chrome-stable'
+" google-chrome-stable for linux
+let g:mkdp_browser = 'Google Chrome'
 " set to 1, echo preview page url in command line when open preview page
 let g:mkdp_echo_preview_url = 0
 " a custom vim function name to open preview page
@@ -58,17 +59,19 @@ let g:mkdp_preview_options = {
 
 " use a custom markdown style must be absolute path
 " like '/Users/username/markdown.css' or expand('~/markdown.css')
-let g:mkdp_markdown_css = ''
+"let g:mkdp_markdown_css = '/Users/rey/.config/nvim/old/markdown/markdown.css'
+" Other
+"let g:mkdp_markdown_css = '~/.config/nvim/old/markdown/markdown.css'
+" Mac
+let g:mkdp_markdown_css = '/Users/your/name/.config/nvim/old/markdown/markdown.css'
 
 " use a custom highlight style must absolute path
 " like '/Users/username/highlight.css' or expand('~/highlight.css')
-let g:mkdp_highlight_css = ''
+"let g:mkdp_highlight_css = '~/.config/nvim/old/markdown/markdown.css'
 
 " use a custom port to start server or random for empty
 let g:mkdp_port = ''
 
 " preview page title
 " ${name} will be replace with the file name
-let g:mkdp_page_title = '「${name}」'
-
-let g:mkdp_browser="google-chrome-stable"
+let g:mkdp_page_title = '${name}'

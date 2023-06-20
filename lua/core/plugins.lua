@@ -243,6 +243,7 @@ return lazy.setup({
     build = function()
       vim.fn["mkdp#util#install"]()
     end,
+    ft = { "markdown" }
   },
   { "dhruvasagar/vim-table-mode" },
 
@@ -252,12 +253,12 @@ return lazy.setup({
     config = function()
       require("configs.vimtex").config()
     end,
-    ft="tex"
+    ft = "tex"
   },
   {
     "jbyuki/nabla.nvim",
     config = function()
-      require("configs.nabla").config()
+      --require("configs.nabla").config()
     end,
   },
 
