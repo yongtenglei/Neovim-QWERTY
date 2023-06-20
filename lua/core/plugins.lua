@@ -22,7 +22,7 @@ end
 
 return lazy.setup({
 
-  { "nvim-lua/popup.nvim" },  -- An implementation of the Popup API from vim in Neovim
+  { "nvim-lua/popup.nvim" },   -- An implementation of the Popup API from vim in Neovim
   { "nvim-lua/plenary.nvim" }, -- Useful lua functions used ny lots of plugins
 
   -- little things make life better
@@ -110,14 +110,29 @@ return lazy.setup({
     config = function()
       require("configs.telescope").config()
     end,
-    lazy = false,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-      },
     },
+    lazy = false
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    dependencies = {
+      { 'nvim-telescope/telescope.nvim' },
+    },
+    config = function()
+      require "telescope".load_extension("fzf")
+    end,
+  },
+  {
+    "nvim-telescope/telescope-bibtex.nvim",
+    dependencies = {
+      { 'nvim-telescope/telescope.nvim' },
+    },
+    config = function()
+      require "telescope".load_extension("bibtex")
+    end,
   },
 
   -- lsp
@@ -139,7 +154,7 @@ return lazy.setup({
       require("configs.lspconfig").config()
     end,
     dependencies = {
-      { "hrsh7th/nvim-cmp" },  -- Autocompletion plugin
+      { "hrsh7th/nvim-cmp" },     -- Autocompletion plugin
       { "hrsh7th/cmp-nvim-lsp" }, -- LSP source for nvim-cmp
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
@@ -147,6 +162,7 @@ return lazy.setup({
       { "hrsh7th/cmp-nvim-lua" },
       { "f3fora/cmp-spell" },
       { "hrsh7th/cmp-calc" },
+      { "kdheepak/cmp-latex-symbols" },
       { "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
       {
         "L3MON4D3/LuaSnip",
@@ -230,7 +246,20 @@ return lazy.setup({
   },
   { "dhruvasagar/vim-table-mode" },
 
-  { "lervag/vimtex" },
+  -- latex
+  {
+    "lervag/vimtex",
+    config = function()
+      require("configs.vimtex").config()
+    end,
+    ft="tex"
+  },
+  {
+    "jbyuki/nabla.nvim",
+    config = function()
+      require("configs.nabla").config()
+    end,
+  },
 
   -- dashboard
   {

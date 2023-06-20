@@ -18,6 +18,99 @@ function M.config()
   -- nvim-cmp setup
   local cmp = require("cmp")
 
+  --   פּ ﯟ   some other good icons
+  --local kind_icons = {
+  --Text = "",
+  --Method = "m",
+  --Function = "",
+  --Constructor = "",
+  --Field = "",
+  --Variable = "",
+  --Class = "",
+  --Interface = "",
+  --Module = "",
+  --Property = "",
+  --Unit = "",
+  --Value = "",
+  --Enum = "",
+  --Keyword = "",
+  --Snippet = "",
+  --Color = "",
+  --File = "",
+  --Reference = "",
+  --Folder = "",
+  --EnumMember = "",
+  --Constant = "",
+  --Struct = "",
+  --Event = "",
+  --Operator = "",
+  --TypeParameter = "",
+  --}
+
+  local kind_icons = {
+    -- Class = '🅒',
+    Class = '∴',
+    -- Color = '☀',
+    -- Color = '⛭',
+    Color = '🖌',
+    -- Constant = 'π',
+    Constant = '𝜋',
+    Constructor = '⬡',
+    -- Constructor = '⌬',
+    -- Constructor = '⎔',
+    -- Constructor = '⚙',
+    -- Constructor = 'ᲃ',
+    Enum = '',
+    EnumMember = '',
+    Event = '',
+    -- Field = '→',
+    -- Field = '∴',
+    --Field = '🠶',
+    Field = "",
+    File = '',
+    Folder = '',
+    Function = 'ƒ',
+    -- Function = 'λ',
+    Interface = '',
+    --Keyword = '🗝',
+    Keyword = "",
+    Method = '𝘮',
+    -- Method = 'λ',
+    --Module = '📦',
+    Module = "",
+    Operator = '≠',
+    -- Operator = '±',
+    -- Property = '::',
+    Property = '∷',
+    -- Reference = '⌦',
+    Reference = '⊷',
+    -- Reference = '⊶',
+    -- Reference = '⊸',
+    -- Snippet = '',
+    -- Snippet = '↲',
+    -- Snippet = '♢',
+    -- Snippet = '<>',
+    Snippet = '{}',
+    Struct = '',
+    --Text = '#',
+    -- Text = '♯',
+    -- Text = 'ⅵ',
+    -- Text = "¶",
+    -- Text = "𝒯",
+    Text = "𝓣",
+    -- Text = "𐄗",
+    TypeParameter = '×',
+    Unit = '()',
+    -- Value           =
+    -- Variable = '𝛼',
+    -- Variable = 'χ',
+    Variable = '𝓧',
+    -- Variable = '𝛸',
+    -- Variable = 'α',
+    -- Variable = '≔',
+  }
+  -- other symbols that might be useful for something: -- ⊕ † ፨ ᯾ ⁂ ∎ ∹ ☖ ⚐ 🕮 🗈 🗉 🗈 🗉 ⬠  ⬡  ⮺  ⮻ ⯐  ⯒ ⟡ ✐  ✎ ꒾꙳ ꥟ ⤙ ⤚ ⤛ ⤜
+
   local select_opts = { behavior = cmp.SelectBehavior.Select }
 
   cmp.setup({
@@ -122,50 +215,74 @@ function M.config()
         },
       },
       { name = "treesitter" },
+      {
+        name = "latex_symbols",
+        option = {
+          strategy = 0, -- mixed
+        },
+      },
       { name = "calc" },
       { name = "path" },
       { name = "nvim_lua" },
       { name = "spell" },
     }),
     formatting = {
-      fields = {
-        cmp.ItemField.Abbr,
-        cmp.ItemField.Kind,
-        cmp.ItemField.Menu,
-      },
-      format = lspkind.cmp_format({
-        mode = "symbol_text",
-        maxwidth = 60,
-        before = function(entry, vim_item)
-          vim_item.menu = ({
-            nvim_lsp = "ﲳ",
-            nvim_lua = "",
-            treesitter = "",
-            path = "ﱮ",
-            buffer = "﬘",
-            zsh = "",
-            luasnip = "",
-            spell = "",
-          })[entry.source.name]
+      fields = { "kind", "abbr", "menu" },
+      format = function(entry, vim_item)
+        -- Kind icons
+        vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+        -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+        vim_item.menu = ({
+          -- omni = "[VimTex]",
+          omni = (vim.inspect(vim_item.menu):gsub('%"', "")),
+          nvim_lsp = "[LSP]",
+          luasnip = "[Snippet]",
+          buffer = "[Buffer]",
+          spell = "[Spell]",
+          latex_symbols = "[Symbols]",
+          cmdline = "[CMD]",
+          path = "[Path]",
+        })[entry.source.name]
+        return vim_item
+      end,
+      --fields = {
+      --cmp.ItemField.Abbr,
+      --cmp.ItemField.Kind,
+      --cmp.ItemField.Menu,
+      --},
+      --format = lspkind.cmp_format({
+      --mode = "symbol_text",
+      --maxwidth = 60,
+      --before = function(entry, vim_item)
+      --vim_item.menu = ({
+      --nvim_lsp = "ﲳ",
+      --nvim_lua = "",
+      --treesitter = "",
+      --path = "ﱮ",
+      --buffer = "﬘",
+      --zsh = "",
+      --luasnip = "",
+      --spell = "",
+      --})[entry.source.name]
 
-          -- Get the full snippet (and only keep first line)
-          local word = entry:get_insert_text()
-          if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-            word = vim.lsp.util.parse_snippet(word)
-          end
-          word = str.oneline(word)
-          if
-              entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-              and string.sub(vim_item.abbr, -1, -1) == "~"
-          then
-            word = word .. "~"
-          end
+      ---- Get the full snippet (and only keep first line)
+      --local word = entry:get_insert_text()
+      --if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
+      --word = vim.lsp.util.parse_snippet(word)
+      --end
+      --word = str.oneline(word)
+      --if
+      --entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
+      --and string.sub(vim_item.abbr, -1, -1) == "~"
+      --then
+      --word = word .. "~"
+      --end
 
-          vim_item.abbr = word
+      --vim_item.abbr = word
 
-          return vim_item
-        end,
-      }),
+      --return vim_item
+      --end,
+      --}),
     },
     --enable catppuccin integration
     native_lsp = {
