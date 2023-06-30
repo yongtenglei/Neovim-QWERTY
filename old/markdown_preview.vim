@@ -63,7 +63,7 @@ let g:mkdp_preview_options = {
 " Other
 "let g:mkdp_markdown_css = '~/.config/nvim/old/markdown/markdown.css'
 " Mac
-let g:mkdp_markdown_css = '/Users/your/name/.config/nvim/old/markdown/markdown.css'
+let g:mkdp_markdown_css = '/Users/rey/.config/nvim/old/markdown/markdown.css'
 
 " use a custom highlight style must absolute path
 " like '/Users/username/highlight.css' or expand('~/highlight.css')

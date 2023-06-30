@@ -5,7 +5,6 @@ end
 
 local M = {}
 function M.config()
-	--local telescope = require("telescope")
 	local actions = require("telescope.actions")
 
 	telescope.setup({
@@ -82,6 +81,10 @@ function M.config()
 					yaml = true,
 				},
 			},
+			xray23 = {
+				-- location to store session files, default is vim.fn.stdpath("data") .. "/vimSession"
+				--sessionDir = "/path/to/session-file",
+			},
 		},
 	})
 	-- add fzf_native plugin
@@ -98,6 +101,11 @@ function M.config()
 		builtin.current_buffer_fuzzy_find(opt)
 	end
 
+	-- or create a user command and use it to save vim session
+	vim.api.nvim_create_user_command("SessionSv", function()
+		vim.api.nvim_cmd(vim.api.nvim_parse_cmd("Telescope xray23 save", {}), {})
+	end, { desc = "load user session,like workspace" })
+
 	vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 	vim.keymap.set("n", "<leader>fF", ":Telescope find_files cwd=")
 	vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
@@ -108,6 +116,9 @@ function M.config()
 	vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
 	vim.keymap.set("n", "<leader>fn", ":Noice telescope<cr>")
 	vim.keymap.set("n", "<leader>fv", ":Telescope aerial<cr>")
+	vim.keymap.set("n", "<leader>fSl", ":Telescope xray23 list<cr>")
+	vim.keymap.set("n", "<leader>fSs", ":SessionSv<cr>")
+	vim.keymap.set("n", "<leader>fy", ":Telescope yank_history<cr>")
 	vim.keymap.set(
 		"n",
 		"<C-_>", -- <C-_> means <C-/> for some historical reason

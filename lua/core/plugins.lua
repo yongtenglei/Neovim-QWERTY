@@ -126,6 +126,25 @@ return lazy.setup({
 		end,
 	},
 	{
+		"HUAHUAI23/telescope-session.nvim",
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("telescope").load_extension("xray23")
+		end,
+	},
+	{
+		"gbprod/yanky.nvim",
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("telescope").load_extension("yank_history")
+			require("yanky").setup({})
+		end,
+	},
+	{
 		"nvim-telescope/telescope-bibtex.nvim",
 		dependencies = {
 			{ "nvim-telescope/telescope.nvim" },
