@@ -126,7 +126,11 @@ return lazy.setup({
 		end,
 	},
 	{
-		"HUAHUAI23/telescope-session.nvim",
+		-- This is original author, check his repo for latest changes
+		--"HUAHUAI23/telescope-session.nvim",
+
+		-- Added some feature I want, so I use this personal one
+		"yongtenglei/telescope-session.nvim",
 		dependencies = {
 			{ "nvim-telescope/telescope.nvim" },
 		},
@@ -355,6 +359,8 @@ return lazy.setup({
 		config = function()
 			require("configs.fidget").config()
 		end,
+		-- to avoid break changes
+		tag = "legacy",
 	},
 
 	-- which-key
