@@ -363,12 +363,9 @@ return lazy.setup({
 		tag = "legacy",
 	},
 
-	-- which-key
+	-- which-key (default config is enough)
 	{
 		"folke/which-key.nvim",
-		config = function()
-			require("configs.which-key").config()
-		end,
 	},
 
 	-- marks
