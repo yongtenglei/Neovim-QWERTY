@@ -327,6 +327,19 @@ return lazy.setup({
 		end,
 		priority = 1000,
 	},
+  --{
+    --"Shatur/neovim-ayu",
+    --config = function()
+      --require("configs.theme.ayu").config()
+    --end,
+    --priority = 1000,
+  --},
+  {
+    "shaunsingh/solarized.nvim",
+    config = function()
+      require("configs.theme.solarized").config()
+    end,
+  },
 
 	-- UI
 	--{
