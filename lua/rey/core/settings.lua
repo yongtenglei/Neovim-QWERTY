@@ -29,8 +29,8 @@ vim.opt.smartindent = true
 
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = "▸ ",
-	trail = "▫",
+  tab = "▸ ",
+  trail = "▫",
 }
 
 vim.opt.mouse = "a"
@@ -50,7 +50,7 @@ vim.opt.laststatus = 2
 vim.opt.autochdir = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
-vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
+vim.opt.conceallevel = 0                                -- so that `` is visible in markdown files
 vim.opt.lazyredraw = false
 vim.opt.compatible = false
 vim.opt.shell = "/bin/bash"
@@ -63,8 +63,8 @@ vim.opt.shortmess:append({ c = true })
 vim.opt.whichwrap:append({ ["<"] = true, [">"] = true, [","] = true, h = true, l = true })
 vim.cmd([[set iskeyword+=-]])
 
--- presistent undo
-vim.bo.undofile = true
+-- persistent undo
+vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
 
 vim.opt.spell = true
@@ -72,8 +72,8 @@ vim.opt.spelllang = { "en_us" }
 
 -- Disables automatic commenting on newline
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "*" },
-	command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+  pattern = { "*" },
+  command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
 })
 
 -- Highlight yanked text
@@ -82,15 +82,15 @@ local ag = vim.api.nvim_create_augroup
 
 ---Highlight the texts when you yanked
 au("TextYankPost", {
-	group = ag("yank_highlight", {}),
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
-	end,
+  group = ag("yank_highlight", {}),
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
+  end,
 })
 
 -- Runs a script that cleans out tex build files whenever I close out of a .tex file
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
-	pattern = { "*.tex" },
-	command = "!texclear %",
+  pattern = { "*.tex" },
+  command = "!texclear %",
 })

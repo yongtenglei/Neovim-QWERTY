@@ -30,7 +30,7 @@ vim.keymap.set("n", "<", "<<", opts)
 vim.keymap.set("n", ">", ">>", opts)
 vim.keymap.set("n", "<leader>o", "za", opts)
 
-vim.keymap.set("n", "<leader><leader>", "<Esc>/<++><CR>:nohlsearch<CR>4xi", opts)
+vim.keymap.set("n", "<leader><leader>", "<Esc>/<++><CR>:nohlsearch<CR>4xa", opts)
 vim.keymap.set("n", "<leader>sc", ":set spell!<cr>", opts)
 vim.keymap.set("n", "<leader>sw", ":set wrap<cr>", opts)
 

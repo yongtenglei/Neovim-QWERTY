@@ -24,6 +24,7 @@ require("lazy").setup({
   { import = "rey.plugins.themes.solarized" },
   { import = "rey.plugins" },
   { import = "rey.plugins.lsp" },
+  { import = "rey.plugins.languages.markdown" },
 },
 {
   checker = {
