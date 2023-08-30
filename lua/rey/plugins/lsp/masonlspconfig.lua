@@ -12,6 +12,7 @@ return {
 				"cmake",
 				"cssls",
 				"gopls",
+				"golangci_lint_ls",
 				"html",
 				"jsonls",
 				"quick_lint_js",

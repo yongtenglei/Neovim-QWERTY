@@ -1,5 +1,7 @@
 return {
+	-- essential plugins
 	{ "nvim-lua/plenary.nvim" },
+	{ "nvim-lua/popup.nvim" },
 
 	{ "christoomey/vim-tmux-navigator" },
 
