@@ -1,5 +1,6 @@
 return {
 	"kyazdani42/nvim-tree.lua",
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		-- disable netrw at the very start of your init.lua (strongly advised)
 		vim.g.loaded = 1

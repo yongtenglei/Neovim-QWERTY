@@ -1,5 +1,8 @@
 return {
 	"stevearc/aerial.nvim",
+	keys = {
+		{ "<leader>v", "<cmd>AerialToggle!<CR>", desc = "aerial" },
+	},
 	config = function()
 		-- Call the setup function to change the default behavior
 		require("aerial").setup({
@@ -278,7 +281,5 @@ return {
 				update_delay = 300,
 			},
 		})
-
-		vim.keymap.set("n", "<leader>v", "<cmd>AerialToggle!<CR>")
 	end,
 }

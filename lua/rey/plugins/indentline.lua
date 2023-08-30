@@ -1,5 +1,6 @@
 return {
 	"lukas-reineke/indent-blankline.nvim",
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		--colored config
 		vim.opt.termguicolors = true

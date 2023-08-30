@@ -1,6 +1,24 @@
 return {
 	"folke/flash.nvim",
 	event = "VeryLazy",
+	keys = {
+		{
+			"s",
+			mode = { "n", "o", "x" },
+			function()
+				require("flash").jump()
+			end,
+			desc = "Flash",
+		},
+		{
+			"S",
+			mode = { "n", "o", "x" },
+			function()
+				require("flash").treesitter()
+			end,
+			desc = "Flash Treesitter",
+		},
+	},
 	config = function()
 		require("flash").setup({
 			-- labels = "abcdefghijklmnopqrstuvwxyz",
@@ -248,18 +266,5 @@ return {
 				motion = false,
 			},
 		})
-
-		vim.api.nvim_set_keymap(
-			"n",
-			"s",
-			':lua require("flash").jump()<cr>',
-			{ noremap = true, silent = true, desc = "flash" }
-		)
-		vim.api.nvim_set_keymap(
-			"n",
-			"S",
-			':lua require("flash").treesitter()<cr>',
-			{ noremap = true, silent = true, desc = "Flash Treesitter" }
-		)
 	end,
 }
