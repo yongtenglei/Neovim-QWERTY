@@ -25,6 +25,7 @@ require("lazy").setup({
 	{ import = "rey.plugins" },
 	{ import = "rey.plugins.lsp" },
 	{ import = "rey.plugins.languages.markdown" },
+	{ import = "rey.plugins.languages.latex" },
 	{ import = "rey.plugins.languages.golang" },
 	{ import = "rey.plugins.languages.rust" },
 }, {
