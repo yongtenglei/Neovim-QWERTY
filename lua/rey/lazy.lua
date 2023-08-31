@@ -22,6 +22,11 @@ end
 require("lazy").setup({
 	-- theme first :)
 	{ import = "rey.plugins.themes.solarized" },
+	-- { import = "rey.plugins.themes.ayu" },
+	-- { import = "rey.plugins.themes.gruvbox" },
+	-- { import = "rey.plugins.themes.kanagawa" },
+	-- { import = "rey.plugins.themes.catppuccin" },
+
 	{ import = "rey.plugins" },
 	{ import = "rey.plugins.lsp" },
 	{ import = "rey.plugins.languages.markdown" },
