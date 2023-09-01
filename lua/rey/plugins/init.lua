@@ -13,6 +13,11 @@ return {
 		"jiangmiao/auto-pairs",
 	},
 
+	-- smarter auto change directory
+	{
+		"airblade/vim-rooter",
+	},
+
 	{
 		"kylechui/nvim-surround",
 		event = { "BufReadPre", "BufNewFile" },

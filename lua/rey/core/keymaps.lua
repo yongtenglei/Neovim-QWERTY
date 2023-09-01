@@ -5,7 +5,7 @@ local opts = { noremap = true, silent = true }
 
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.vim <cr>", opts)
+vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.lua <cr>", opts)
 
 vim.keymap.set("n", "=", "nzz", opts)
 vim.keymap.set("n", "-", "Nzz", opts)
