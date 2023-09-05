@@ -9,10 +9,6 @@ return {
 	-- comment: <leader>cc uncomment: <leader>cu
 	{ "scrooloose/nerdcommenter", lazy = false },
 
-	{
-		"jiangmiao/auto-pairs",
-	},
-
 	-- smarter auto change directory
 	{
 		"airblade/vim-rooter",
