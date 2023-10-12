@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufRead", "BufNewFile" },
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- A list of parser names, or "all"
