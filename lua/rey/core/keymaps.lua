@@ -92,11 +92,5 @@ vim.keymap.set("n", "zm", ":lnext<cr>", opts)
 vim.keymap.set("n", "zk", ":lprevious<cr>", opts)
 vim.keymap.set("n", "zc", ":lclose<cr>", opts)
 
--- refersh buffer
-local function refreshBuf()
-	vim.cmd("set noconfirm")
-	vim.cmd("bufdo e !")
-	vim.cmd("set confirm")
-end
-
-vim.keymap.set("n", "<leader>rb", refreshBuf)
+-- terminal enhancement
+vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
