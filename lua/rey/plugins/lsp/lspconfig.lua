@@ -23,6 +23,16 @@ return {
 		-- Use an on_attach function to only map the following keys
 		-- after the language server attaches to the current buffer
 		local on_attach = function(client, bufnr)
+
+      local signature_setup = {
+        --hint_prefix = "🐼 ",
+        --hint_prefix = "🐧 ",
+        --hint_prefix = "🦔 ",
+        hint_prefix = "🦫 ",
+      }
+
+      require "lsp_signature".on_attach(signature_setup, bufnr)
+
 			-- Enable completion triggered by <c-x><c-o>
 			vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -81,4 +91,7 @@ return {
 			})
 		end
 	end,
+	dependencies = {
+    { "ray-x/lsp_signature.nvim" },
+  },
 }
