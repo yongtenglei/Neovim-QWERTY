@@ -102,6 +102,10 @@ return {
 					"White",
 				}, -- table of colour name strings
 			},
+
+			autotag = {
+				enable = true,
+			},
 		})
 	end,
 	build = ":TSUpdate",
@@ -132,5 +136,6 @@ return {
 				}
 			end,
 		},
+		{ "windwp/nvim-ts-autotag" },
 	},
 }
