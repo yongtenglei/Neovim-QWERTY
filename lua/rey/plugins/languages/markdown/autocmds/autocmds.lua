@@ -9,10 +9,10 @@ vim.cmd([[autocmd Filetype markdown inoremap <buffer> ,c ```<Enter><++><Enter>``
 vim.cmd("autocmd Filetype markdown inoremap <buffer> ,m - [ ]]")
 vim.cmd([[autocmd Filetype markdown inoremap <buffer> ,p ![](<++>) <++><Esc>F[a]])
 vim.cmd(
-	[[autocmd Filetype markdown inoremap <buffer> ,q <div align=center><img src=""></div><Enter><Enter><++><ESC>2k^f"a]]
+  [[autocmd Filetype markdown inoremap <buffer> ,q <div align=center><img src=""></div><Enter><Enter><++><ESC>2k^f"a]]
 )
 vim.cmd(
-	[[autocmd Filetype markdown inoremap <buffer> ,x <div align=center><Enter><Enter><++><Enter><Enter></div><Enter><Enter><++><ESC>4k0c$]]
+  [[autocmd Filetype markdown inoremap <buffer> ,x <div align=center><Enter><Enter><++><Enter><Enter></div><Enter><Enter><++><ESC>4k0c$]]
 )
 vim.cmd([[autocmd Filetype markdown inoremap <buffer> ,a [](<++>) <++><Esc>F[a]])
 vim.cmd([[autocmd Filetype markdown inoremap <buffer> ,1 #<Space><Enter><++><Esc>kA]])
