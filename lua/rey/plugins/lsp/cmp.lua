@@ -107,6 +107,7 @@ return {
       -- Variable = '𝛸',
       -- Variable = 'α',
       -- Variable = '≔',
+      Copilot = "",
     }
     -- other symbols that might be useful for something: -- ⊕ † ፨ ᯾ ⁂ ∎ ∹ ☖ ⚐ 🕮 🗈 🗉 🗈 🗉 ⬠  ⬡  ⮺  ⮻ ⯐  ⯒ ⟡ ✐  ✎ ꒾꙳ ꥟ ⤙ ⤚ ⤛ ⤜
 
@@ -216,6 +217,7 @@ return {
           end,
         }, -- For luasnip users.
         { name = "nvim_lsp" },
+        { name = "copilot" },
         {
           name = "buffer",
           option = {
@@ -252,6 +254,7 @@ return {
             latex_symbols = "[Symbols]",
             cmdline = "[CMD]",
             path = "[Path]",
+            copilot = "[Copilot]",
           })[entry.source.name]
           return vim_item
         end,
@@ -385,5 +388,12 @@ return {
     { "saadparwaiz1/cmp_luasnip" },
     { "ray-x/cmp-treesitter" },
     { "onsails/lspkind.nvim" },
+    {
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua" },
+      config = function()
+        require("copilot_cmp").setup()
+      end,
+    },
   },
 }
