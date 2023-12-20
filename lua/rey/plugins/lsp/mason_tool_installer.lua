@@ -20,12 +20,17 @@ return {
         { "gofumpt" },
         { "gomodifytags" },
         { "gotests" },
+        { "goimports" },
+        { "golines" },
+        { "impl" },
 
         -- python
         { "black" },
         { "pyright" },
         { "pylint" },
         { "isort" },
+        -- install bandit manually
+        -- { "bandit" },
 
         -- C/C++
         { "clangd" },
@@ -38,6 +43,8 @@ return {
 
         -- sql
         { "sqlls" },
+        -- install sql_formatter manually
+        -- { "sql_formatter" },
 
         -- front end
         { "quick_lint_js" },
@@ -47,12 +54,15 @@ return {
 
         -- yaml
         { "yamlls" },
+        { "yamlfmt" },
 
         -- json
         { "jsonls" },
+        { "jq" },
 
         -- markdown
-        { "vale" },
+        { "mdformat" },
+        { "markdownlint" },
       },
 
       auto_update = false,

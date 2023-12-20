@@ -7,6 +7,18 @@ return {
         lua = { "stylua" },
 
         python = { "isort", "black" },
+
+        go = { "gofumpt", "goimports", "golines" },
+
+        markdown = { "mdformat" },
+
+        ["sh"] = { "shfmt" },
+
+        yaml = { "yamlfmt" },
+
+        json = { "jq" },
+
+        sql = { "sql_formatter" },
       },
 
       format_on_save = {
