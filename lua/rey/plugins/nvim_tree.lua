@@ -33,6 +33,8 @@ return {
       vim.keymap.set("n", "J", api.node.navigate.sibling.last, opts("Last Sibling"))
       vim.keymap.set("n", "I", api.tree.toggle_gitignore_filter, opts("Toggle Git Ignore"))
       vim.keymap.set("n", "H", api.tree.toggle_hidden_filter, opts("Toggle Dotfiles"))
+      vim.keymap.set("n", "<C-h>", api.tree.toggle_hidden_filter, opts("Toggle Dotfiles"))
+      vim.keymap.set("n", "<zh>", api.tree.toggle_hidden_filter, opts("Toggle Dotfiles"))
       vim.keymap.set("n", "U", api.tree.toggle_custom_filter, opts("Toggle Hidden"))
       vim.keymap.set("n", "R", api.tree.reload, opts("Refresh"))
       vim.keymap.set("n", "a", api.fs.create, opts("Create"))
