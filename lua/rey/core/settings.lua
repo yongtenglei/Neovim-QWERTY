@@ -41,7 +41,7 @@ vim.opt.guifont = "Cascadia_Code_PL:h12"
 vim.opt.showmatch = true
 vim.opt.autowrite = true
 vim.opt.formatoptions = ""
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 999
 vim.opt.tw = 0
 vim.opt.backspace = "indent,eol,start"
 vim.opt.foldmethod = "indent"
@@ -58,6 +58,9 @@ vim.opt.signcolumn = "yes"
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.writebackup = false
+
+vim.opt.virtualedit = "block"
+vim.opt.inccommand = "split"
 
 vim.opt.shortmess:append({ c = true })
 vim.opt.whichwrap:append({ ["<"] = true, [">"] = true, [","] = true, h = true, l = true })
