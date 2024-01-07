@@ -75,7 +75,7 @@ return {
     local servers = {
       "clangd",
       "pyright",
-      "rust_analyzer",
+      -- "rust_analyzer", -- handled by other plugin
       "lua_ls",
       "cmake",
       "cssls",

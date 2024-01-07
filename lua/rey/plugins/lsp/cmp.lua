@@ -218,6 +218,7 @@ return {
         }, -- For luasnip users.
         { name = "nvim_lsp" },
         { name = "copilot" },
+        { name = "crates" },
         {
           name = "buffer",
           option = {
