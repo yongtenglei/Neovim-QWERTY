@@ -3,7 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("lint").linters_by_ft = {
-      python = { "pyright", "pylint", "bandit" },
+      python = { "pylint", "bandit" },
       markdown = { "markdownlint" },
       golang = { "golangcilint" },
     }
