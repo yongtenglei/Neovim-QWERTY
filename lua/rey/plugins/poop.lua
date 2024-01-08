@@ -17,7 +17,7 @@ return {
     }
 
     -- Customized settings
-    vim.g.eject_speed = 30
+    vim.g.eject_speed = 80
     local emojis = { "💩", "👻", "🐙", "⚡️" }
     local period = 5
 
