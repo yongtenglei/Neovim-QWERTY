@@ -17,7 +17,8 @@ return {
         --number_style = "superscript" | "subscript" | "" | { "none", "subscript" }, -- buffer_id at index 1, ordinal at index 2
         --number_style =  "subscript",
         modified_icon = "✥",
-        --buffer_close_icon = "",
+        buffer_close_icon = "󰅖",
+        close_icon = "",
         left_trunc_marker = "",
         right_trunc_marker = "",
         max_name_length = 14,
