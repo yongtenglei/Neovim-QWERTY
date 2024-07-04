@@ -38,8 +38,8 @@ vim.keymap.set("n", "<leader>sw", ":set wrap<cr>", opts)
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 -- Move text up and down
-vim.keymap.set("v", "<A-up>", ":m .+1<CR>==", opts)
-vim.keymap.set("v", "<A-down>", ":m .-2<CR>==", opts)
+vim.keymap.set("v", "<A-down>", ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set("v", "<A-up>", ":m '<-2<CR>gv=gv", opts)
 -- replace what you highlight
 vim.keymap.set("v", "p", '"_dP', opts)
 
