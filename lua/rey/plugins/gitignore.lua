@@ -10,7 +10,7 @@ return {
       desc = "Gitignore generator",
     },
   },
-  requires = {
+  dependencies = {
     "nvim-telescope/telescope.nvim",
   },
 }
