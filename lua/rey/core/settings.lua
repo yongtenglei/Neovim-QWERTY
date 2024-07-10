@@ -40,6 +40,7 @@ vim.opt.guifont = "Cascadia_Code_PL:h12"
 -- vim.opt.guifont = 'Fira_Code_Font'
 vim.opt.showmatch = true
 vim.opt.autowrite = true
+vim.opt.autoread = true
 vim.opt.formatoptions = ""
 vim.opt.scrolloff = 999
 vim.opt.tw = 0

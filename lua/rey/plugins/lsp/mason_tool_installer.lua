@@ -29,8 +29,9 @@ return {
         { "pyright" },
         { "pylint" },
         { "isort" },
-        -- install bandit manually
-        -- { "bandit" },
+        { "mypy" },
+        { "ruff" },
+        { "bandit" },
 
         -- C/C++
         { "clangd" },

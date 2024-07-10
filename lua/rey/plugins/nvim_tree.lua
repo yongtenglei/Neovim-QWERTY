@@ -1,6 +1,6 @@
 return {
   "nvim-tree/nvim-tree.lua",
-  event = { "BufReadPre", "BufNewFile" },
+  -- event = { "BufReadPre", "BufNewFile" },
   config = function()
     -- disable netrw at the very start of your init.lua (strongly advised)
     vim.g.loaded = 1
@@ -111,5 +111,4 @@ return {
       on_attach = on_attach,
     })
   end,
-  version = "nightly",
 }
