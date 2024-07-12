@@ -23,6 +23,8 @@ return {
     -- Use an on_attach function to only map the following keys
     -- after the language server attaches to the current buffer
     local on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(true, { bufnr })
+
       local signature_setup = {
         --hint_prefix = "🐼 ",
         --hint_prefix = "🐧 ",
@@ -76,7 +78,7 @@ return {
       "clangd",
       "pyright",
       "ruff_lsp",
-      -- "rust_analyzer", -- handled by other plugin
+      "rust_analyzer",
       "lua_ls",
       "cmake",
       "cssls",
@@ -98,6 +100,37 @@ return {
             Lua = {
               diagnostics = {
                 globals = { "vim" },
+              },
+            },
+          },
+          on_attach = on_attach,
+          flags = lsp_flags,
+        })
+      elseif lsp == "rust_analyzer" then
+        lspconfig[lsp].setup({
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = true,
+              check = { command = "clippy", features = "all" },
+              assist = {
+                importGranularity = "module",
+                importPrefix = "self",
+              },
+              diagnostics = {
+                enable = true,
+                enableExperimental = true,
+              },
+              cargo = {
+                loadOutDirsFromCheck = true,
+                features = "all", -- avoid error: file not included in crate hierarchy
+              },
+              procMacro = {
+                enable = true,
+              },
+              inlayHints = {
+                chainingHints = true,
+                parameterHints = true,
+                typeHints = true,
               },
             },
           },
