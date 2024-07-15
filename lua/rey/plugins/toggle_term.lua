@@ -16,7 +16,7 @@ return {
             return 20
           end
         end,
-        open_mapping = [[<c-\>]],
+        open_mapping = "<leader>ft",
         hide_numbers = true,
         shade_filetypes = {},
         shade_terminals = true,
