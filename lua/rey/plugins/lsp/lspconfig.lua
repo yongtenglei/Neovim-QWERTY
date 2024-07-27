@@ -55,7 +55,15 @@ return {
       end, bufopts)
       vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
       vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-      vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+
+      require("tiny-code-action").setup({
+        -- backend = "vim",
+        backend = "delta",
+      })
+      vim.keymap.set("n", "<leader>ca", function()
+        require("tiny-code-action").code_action()
+      end, bufopts)
+      -- vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 
       -- use telescope packer
       --vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
@@ -147,5 +155,6 @@ return {
   end,
   dependencies = {
     { "ray-x/lsp_signature.nvim" },
+    { "rachartier/tiny-code-action.nvim" },
   },
 }
