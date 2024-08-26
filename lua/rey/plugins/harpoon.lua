@@ -1,27 +1,39 @@
 return {
   "ThePrimeagen/harpoon",
+  branch = "harpoon2",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
   config = function()
-    require("harpoon").setup({
-      menu = {
-        width = vim.api.nvim_win_get_width(0) - 40,
-      },
-    })
+    local harpoon = require("harpoon")
+    harpoon:setup()
+
+    vim.keymap.set("n", "<C-m>", function()
+      harpoon:list():add()
+    end)
+    vim.keymap.set("n", "<C-e>", function()
+      harpoon.ui:toggle_quick_menu(harpoon:list())
+    end)
+
+    vim.keymap.set("n", "<C-j>", function()
+      harpoon:list():select(1)
+    end)
+    vim.keymap.set("n", "<C-k>", function()
+      harpoon:list():select(2)
+    end)
+    vim.keymap.set("n", "<C-h>", function()
+      harpoon:list():select(3)
+    end)
+    vim.keymap.set("n", "<C-l>", function()
+      harpoon:list():select(4)
+    end)
+
+    -- Toggle previous & next buffers stored within Harpoon list
+    vim.keymap.set("n", "<C-;>", function()
+      harpoon:list():prev()
+    end)
+    vim.keymap.set("n", "<C-'>", function()
+      harpoon:list():next()
+    end)
   end,
-  keys = {
-    { "gm", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Mark file with harpoon" },
-    { "g;", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Go to next harpoon mark" },
-    {
-      "g'",
-      "<cmd>lua require('harpoon.ui').nav_prev()<cr>",
-      desc = "Go to previous harpoon mark",
-    },
-    { "ga", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Show harpoon marks" },
-    { "gj", "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", desc = "go harpoon marks 1" },
-    { "gk", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", desc = "go harpoon marks 2" },
-    { "gh", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", desc = "go harpoon marks 3" },
-    { "gl", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", desc = "go harpoon marks 4" },
-  },
 }
