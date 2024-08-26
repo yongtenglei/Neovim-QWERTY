@@ -3,7 +3,7 @@ return {
   { "nvim-lua/plenary.nvim" },
   { "nvim-lua/popup.nvim" },
 
-  { "christoomey/vim-tmux-navigator" },
+  -- { "christoomey/vim-tmux-navigator" },
 
   -- smarter auto change directory
   { "airblade/vim-rooter" },
