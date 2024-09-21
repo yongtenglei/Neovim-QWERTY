@@ -26,6 +26,10 @@
       {
         "language": "rust",
         "path": "./rey-snippets/rust.json"
+      },
+      {
+        "language": "http",
+        "path": "./rey-snippets/http.json"
       }
     ]
   }

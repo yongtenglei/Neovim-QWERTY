@@ -1,0 +1,44 @@
+{
+  "Basic GET request": {
+    "prefix": "get",
+    "body": [
+      "### ${1:Description}",
+      "GET ${2:Address}${0}"
+    ],
+    "description": "Basic GET request"
+  },
+  "Basic POST request": {
+    "prefix": "post",
+    "body": [
+      "### ${1:Description}",
+      "POST ${2:Address}",
+      "",
+      "${3:body}${0}"
+    ],
+    "description": "Basic POST request"
+  },
+  "POST with Json": {
+    "prefix": "pjson",
+    "body": [
+      "### ${1:Description}",
+      "POST ${2:Address}",
+      "Content-Type: application/json",
+      "",
+      "{",
+      "    \"${3:key1}\": ${4:value1}${0}",
+      "}"
+    ],
+    "description": "POST with Json"
+  },
+  "POST with Form": {
+    "prefix": "pform",
+    "body": [
+      "### ${1:Description}",
+      "POST ${2:Address}",
+      "Content-Type: application/x-www-form-urlencoded",
+      "",
+      "${3:key1=value1&key2=value2}${0}"
+    ],
+    "description": "POST with Form"
+  }
+}
