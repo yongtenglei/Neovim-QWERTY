@@ -85,7 +85,7 @@ return {
     local servers = {
       "clangd",
       "pyright",
-      "ruff_lsp",
+      "ruff",
       "rust_analyzer",
       "lua_ls",
       "cmake",
