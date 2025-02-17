@@ -1,17 +1,331 @@
 {
   "fmt.Println": {
     "prefix": "fn",
-    "body": ["fmt.Println(${1:})${0}"],
-    "description": "fmt.Println"
+    "body": [
+      "fmt.Println(${1:${VISUAL}})"
+    ],
+    "description": "fmt.Println debug statement"
+  },
+  "fmt.Printf": {
+    "prefix": "ff",
+    "body": [
+      "fmt.Printf(\"${1:}\", ${2:var})${0}"
+    ],
+    "description": "fmt.Printf"
+  },
+  "log.Println": {
+    "prefix": "ln",
+    "body": [
+      "log.Println(${1:})${0}"
+    ],
+    "description": "log.Println"
+  },
+  "log.Printf": {
+    "prefix": "lf",
+    "body": [
+      "log.Printf(\"${1:}\", ${2:var})${0}"
+    ],
+    "description": "log.Println"
   },
   "handle error": {
     "prefix": "eh",
-    "body": ["if err != nil {", "  ${1:}", "}", "${0}"],
+    "body": [
+      "if err != nil {",
+      "  ${1:}",
+      "}",
+      "${0}"
+    ],
     "description": "handle error"
   },
   "main": {
     "prefix": "main",
-    "body": ["func main() {", "  ${0}", "}"],
+    "body": [
+      "func main() {",
+      "  ${0}",
+      "}"
+    ],
     "description": "main"
+  },
+  "Variable Declaration": {
+    "prefix": "var",
+    "body": [
+      "var ${1:x} ${2:Type}${3: = ${0:value}}"
+    ],
+    "description": "var x Type [= ...]"
+  },
+  "Variables Declaration Block": {
+    "prefix": "vars",
+    "body": [
+      "var (",
+      "\t${1:x} ${2:Type}${3: = ${0:value}}",
+      ")"
+    ],
+    "description": "var ( ... )"
+  },
+  "fmt.Printf Debug": {
+    "prefix": "ff",
+    "body": [
+      "fmt.Printf(\"$1 = %+v\\n\", ${1:${VISUAL}})"
+    ],
+    "description": "fmt.Printf debug"
+  },
+  "Append Slice": {
+    "prefix": "ap",
+    "body": [
+      "append(${1:slice}, ${0:value})"
+    ],
+    "description": "Append to slice"
+  },
+  "Fallthrough Statement": {
+    "prefix": "ft",
+    "body": [
+      "fallthrough"
+    ],
+    "description": "Add a fallthrough statement"
+  },
+  "For Loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1} {",
+      "\t${0:${VISUAL}}",
+      "}"
+    ],
+    "description": "For loop"
+  },
+  "For Range Loop": {
+    "prefix": "forr",
+    "body": [
+      "for ${2:k}, ${3:v} := range ${1} {",
+      "\t${0:${VISUAL}}",
+      "}"
+    ],
+    "description": "For range loop"
+  },
+  "Function": {
+    "prefix": "func",
+    "body": [
+      "func ${1:name}(${2:params})${3/(.+)/ /}`!p opening_par(snip, 3)`$3`!p closing_par(snip, 3)` {",
+      "\t${0:${VISUAL}}",
+      "}"
+    ],
+    "description": "Function declaration"
+  },
+  "Main Function": {
+    "prefix": "main",
+    "body": [
+      "func main() {",
+      "\t${0:${VISUAL}}",
+      "}"
+    ],
+    "description": "Main function"
+  },
+  "Defer Function": {
+    "prefix": "def",
+    "body": [
+      "defer func() {",
+      "\t${0:${VISUAL}}",
+      "}()"
+    ],
+    "description": "Defer anonymous function"
+  },
+  "If Condition": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition} {",
+      "\t${0:${VISUAL}}",
+      "}"
+    ],
+    "description": "If condition"
+  },
+  "If with Inline Error": {
+    "prefix": "ife",
+    "body": [
+      "if err := ${1:condition}; err != nil {",
+      "\t${0:${VISUAL}}",
+      "}"
+    ],
+    "description": "If condition with inline error handling"
+  },
+  "Return Statement": {
+    "prefix": "rt",
+    "body": [
+      "return ${0:${VISUAL}}"
+    ],
+    "description": "Return statement"
+  },
+  "Select Case": {
+    "prefix": "select",
+    "body": [
+      "select {",
+      "case ${1:v1} := <-${2:chan1}:",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Select case statement"
+  },
+  "Struct": {
+    "prefix": "st",
+    "body": [
+      "type ${1:Type} struct {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Struct declaration"
+  },
+  "Switch Statement": {
+    "prefix": "switch",
+    "body": [
+      "switch ${1:var} {",
+      "case ${2:value1}:",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Switch statement"
+  },
+  "Type Switch Statement": {
+    "prefix": "tswitch",
+    "body": [
+      "switch ${2:$1 := }${1:v}.(type) {",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Type switch statement"
+  },
+  "Sprintf": {
+    "prefix": "sp",
+    "body": [
+      "fmt.Sprintf(\"%${1:s}\", ${2:var})"
+    ],
+    "description": "fmt.Sprintf"
+  },
+  "Goroutine Named Function": {
+    "prefix": "go",
+    "body": [
+      "go ${1:funcName}(${0})"
+    ],
+    "description": "Goroutine named function"
+  },
+  "Goroutine Anonymous Function": {
+    "prefix": "gof",
+    "body": [
+      "go func() {",
+      "\t${1:${VISUAL}}",
+      "}()",
+      "${0}"
+    ],
+    "description": "Goroutine anonymous function"
+  },
+  "Test Function": {
+    "prefix": "test",
+    "body": [
+      "func Test${1:Function}(t *testing.T) {",
+      "\t${0:${VISUAL}}",
+      "}"
+    ],
+    "description": "Test function"
+  },
+  "Test t.Run": {
+    "prefix": "tr",
+    "body": [
+      "t.Run(\"${0}\", func(t *testing.T){",
+      "\t",
+      "})"
+    ],
+    "description": "t.Run test case"
+  },
+  "Test Table": {
+    "prefix": "tt",
+    "body": [
+      "var tests = []struct {",
+      "\tname string",
+      "\texpected string",
+      "\tgiven string",
+      "}{",
+      "\t{\"${1}\", \"${2}\", \"${3}\",},",
+      "}",
+      "for _, tt := range tests {",
+      "\ttt := tt",
+      "\tt.Run(tt.name, func(t *testing.T){",
+      "\t\tactual := ${0:${VISUAL}}(tt.given)",
+      "\t\tif actual != tt.expected {",
+      "\t\t\t\tt.Errorf(\"$0(%s): expected %s, actual %s\", tt.given, tt.expected, actual)",
+      "\t\t}",
+      "\t})",
+      "}"
+    ],
+    "description": "Test table snippet"
+  },
+  "Fuzz Function": {
+    "prefix": "fuzz",
+    "body": [
+      "func Fuzz${1:Function}(f *testing.F) {",
+      "\tf.Fuzz(func(t *testing.T, ${2}) {",
+      "\t\t${0:${VISUAL}}",
+      "\t})",
+      "}"
+    ],
+    "description": "Fuzz function"
+  },
+  "HTTP HandlerFunc": {
+    "prefix": "hf",
+    "body": [
+      "func ${1:handler}(w http.ResponseWriter, r *http.Request) {",
+      "\t${0:fmt.Fprintf(w, \"hello world\")}",
+      "}"
+    ],
+    "description": "http.HandlerFunc"
+  },
+  "HTTP HandleFunc": {
+    "prefix": "hhf",
+    "body": [
+      "${1:http}.HandleFunc(\"${2:/}\", func(w http.ResponseWriter, r *http.Request) {",
+      "\t${0:fmt.Fprintf(w, \"hello world\")}",
+      "})"
+    ],
+    "description": "mux.HandleFunc"
+  },
+  "Quick Test Server": {
+    "prefix": "tsrv",
+    "body": [
+      "ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {",
+      "\tfmt.Fprintln(w, ${1:`response`})",
+      "}))",
+      "defer ts.Close()",
+      "",
+      "${0:someUrl} = ts.URL"
+    ],
+    "description": "Quick test server"
+  },
+  "Example Function": {
+    "prefix": "example",
+    "body": [
+      "func Example${1:Method}() {",
+      "\t${0:${VISUAL}}",
+      "\t// Output:",
+      "}"
+    ],
+    "description": "func ExampleXYZ() { ... }"
+  },
+  "Benchmark Function": {
+    "prefix": "benchmark",
+    "body": [
+      "func Benchmark${1:Method}(b *testing.B) {",
+      "\tfor i := 0; i < b.N; i++ {",
+      "\t\t${0:${VISUAL}}",
+      "\t}",
+      "}"
+    ],
+    "description": "func BenchmarkXYZ(b *testing.B) { ... }"
+  },
+  "DeepEqual Test": {
+    "prefix": "eq",
+    "body": [
+      "if !reflect.DeepEqual(${1:expected}, ${2:actual}) {",
+      "\t_, file, line, _ := runtime.Caller(0)",
+      "\tfmt.Printf(\"%s:%d:\\n\\n\\texp: %#v\\n\\n\\tgot: %#v\\n\\n\", filepath.Base(file), line, $1, $2)",
+      "\tt.FailNow()",
+      "}"
+    ],
+    "description": "equals: test two identifiers with DeepEqual"
   }
 }
