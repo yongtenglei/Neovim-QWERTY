@@ -23,6 +23,10 @@ return {
     -- Use an on_attach function to only map the following keys
     -- after the language server attaches to the current buffer
     local on_attach = function(client, bufnr)
+      -- Hand formatting stuff to conform.nvim
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+
       vim.lsp.inlay_hint.enable(true, { bufnr })
 
       local signature_setup = {

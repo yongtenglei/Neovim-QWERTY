@@ -237,7 +237,7 @@ return {
         { name = "calc" },
         { name = "path" },
         { name = "nvim_lua" },
-        { name = "spell" },
+        -- { name = "spell" },
       }),
       formatting = {
         fields = { "kind", "abbr", "menu" },

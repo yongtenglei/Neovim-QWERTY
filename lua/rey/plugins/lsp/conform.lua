@@ -6,7 +6,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
 
-        python = { "isort", "black" },
+        python = { "ruff_organize_imports", "ruff_fix", "autopep8" },
 
         go = { "gofumpt", "goimports", "golines" },
 
@@ -25,8 +25,16 @@ return {
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        return { timeout_ms = 500, lsp_fallback = true }
+
+        -- Only conform can take it!
+        return { timeout_ms = 500, lsp_fallback = false }
       end,
+
+      formatters = {
+        autopep8 = {
+          prepend_args = { "--max-line-length", "200" },
+        },
+      },
     })
 
     vim.api.nvim_create_user_command("FormatDisable", function(args)
