@@ -32,8 +32,8 @@ require("lazy").setup({
   { import = "rey.plugins.lsp" },
   { import = "rey.plugins.ui" },
   { import = "rey.plugins.mini" },
+  { import = "rey.plugins.snacks" },
   { import = "rey.plugins.languages.markdown" },
-  { import = "rey.plugins.languages.latex" },
   { import = "rey.plugins.languages.golang" },
 }, {
   checker = {

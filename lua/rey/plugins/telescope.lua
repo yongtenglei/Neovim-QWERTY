@@ -80,6 +80,7 @@ return {
           },
         },
       },
+
       extensions = {
         fzf = {
           fuzzy = true, -- false will only do exact matching
@@ -100,34 +101,6 @@ return {
           -- location to store session files, default is vim.fn.stdpath("data") .. "/vimSession"
           --sessionDir = "/path/to/session-file",
         },
-        bibtex = {
-          -- Depth for the *.bib file
-          depth = 1,
-          -- Custom format for citation label
-          custom_formats = {},
-          -- Format to use for citation label.
-          -- Try to match the filetype by default, or use 'plain'
-          format = "",
-          -- Path to global bibliographies (placed outside of the project)
-          global_files = { "~/Library/texmf/bibtex/bib/Zotero.bib" },
-          -- Define the search keys to use in the picker
-          search_keys = { "label", "author", "year", "title" },
-          -- Template for the formatted citation
-          citation_format = "{{author}} ({{year}})",
-          -- citation_format = "{{author}} ({{year}}), {{title}}.",
-          -- Only use initials for the authors first name
-          citation_trim_firstname = true,
-          -- Max number of authors to write in the formatted citation
-          -- following authors will be replaced by "et al."
-          citation_max_auth = 3,
-          -- Context awareness disabled by default
-          context = true,
-          -- Fallback to global/directory .bib files if context not found
-          -- This setting has no effect if context = false
-          context_fallback = true,
-          -- Wrapping in the preview window is disabled by default
-          wrap = false,
-        },
       },
     })
 
@@ -135,18 +108,9 @@ return {
     telescope.load_extension("aerial")
     telescope.load_extension("xray23")
     telescope.load_extension("yank_history")
-    telescope.load_extension("bibtex")
 
-    -- mapping function
     local builtin = require("telescope.builtin")
-    local theme = require("telescope.themes")
 
-    local curr_buff = function()
-      local opt = theme.get_ivy()
-      builtin.current_buffer_fuzzy_find(opt)
-    end
-
-    -- or create a user command and use it to save vim session
     vim.api.nvim_create_user_command("SessionSv", function()
       vim.api.nvim_cmd(vim.api.nvim_parse_cmd("Telescope xray23 save", {}), {})
     end, { desc = "load user session,like workspace" })
@@ -159,29 +123,16 @@ return {
     vim.keymap.set("n", "<leader>fc", builtin.command_history, {})
     vim.keymap.set("n", "<leader>fs", builtin.search_history, {})
     vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
-    vim.keymap.set("n", "<leader>fn", ":Noice telescope<cr>")
     vim.keymap.set("n", "<leader>fv", ":Telescope aerial<cr>")
     vim.keymap.set("n", "<leader>fSl", ":Telescope xray23 list<cr>")
     vim.keymap.set("n", "<leader>fSs", ":SessionSv<cr>")
     vim.keymap.set("n", "<leader>fy", ":Telescope yank_history<cr>")
-    -- <CR>:citation label (@Newton1687)
-    -- <C-e>: citation latex entry
-    -- <C-c>: formatted citation (Newton, I. (1687), Philosophiae naturalis principa mathematica.)
-    vim.keymap.set("n", "<leader>flc", ":Telescope bibtex<cr>")
-    vim.keymap.set(
-      "n",
-      "<C-_>", -- <C-_> means <C-/> for some historical reason
-      curr_buff,
-      {}
-      --":Telescope current_buffer_fuzzy_find sorting_strategy=ascending theme=ivy <cr>" -- vim script format
-    )
-    vim.keymap.set("n", "<leader>flc", ":Telescope bibtex<cr>")
+    vim.keymap.set("n", "<leader>f/", ":Telescope current_buffer_fuzzy_find sorting_strategy=ascending theme=ivy <cr>")
   end,
+
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "nvim-telescope/telescope.nvim" },
-    { "nvim-telescope/telescope-bibtex.nvim" },
     { "stevearc/aerial.nvim" },
     {
       "gbprod/yanky.nvim",
@@ -190,7 +141,6 @@ return {
       end,
     },
 
-    -- session
     -- This is original author, check his repo for latest changes
     --"HUAHUAI23/telescope-session.nvim",
     -- Added some feature I want, so I use this personal one
