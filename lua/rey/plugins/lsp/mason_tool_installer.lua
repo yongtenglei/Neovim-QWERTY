@@ -32,6 +32,7 @@ return {
         { "mypy" },
         { "ruff" },
         { "bandit" },
+        { "basedpyright" },
 
         -- C/C++
         { "clangd" },

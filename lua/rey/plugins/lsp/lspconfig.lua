@@ -88,7 +88,8 @@ return {
 
     local servers = {
       "clangd",
-      "pyright",
+      -- "pyright",
+      "basedpyright",
       "ruff",
       "rust_analyzer",
       "lua_ls",
@@ -96,7 +97,7 @@ return {
       "cssls",
       "vuels",
       "dockerls",
-      "gopls",
+      "golangci_lint_ls",
       "html",
       "jsonls",
       "sqlls",
@@ -112,6 +113,22 @@ return {
             Lua = {
               diagnostics = {
                 globals = { "vim" },
+              },
+            },
+          },
+          on_attach = on_attach,
+          flags = lsp_flags,
+        })
+      elseif lsp == "basedpyright" then
+        lspconfig[lsp].setup({
+          settings = {
+            basedpyright = {
+              disableOrganizeImports = true,
+              typeCheckingMode = "off",
+              analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = false,
               },
             },
           },

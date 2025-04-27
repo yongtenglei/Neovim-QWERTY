@@ -6,7 +6,8 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
 
-        python = { "ruff_organize_imports", "ruff_fix", "autopep8" },
+        -- python = { "ruff_organize_imports", "ruff_fix", "autopep8" },
+        python = { "ruff_organize_imports", "ruff_fix", "ruff_format" },
 
         go = { "gofumpt", "goimports", "golines" },
 
@@ -27,7 +28,7 @@ return {
         end
 
         -- Only conform can take it!
-        return { timeout_ms = 500, lsp_fallback = false }
+        return { timeout_ms = 5000, lsp_fallback = false }
       end,
 
       formatters = {
