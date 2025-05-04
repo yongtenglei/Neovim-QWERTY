@@ -13,6 +13,10 @@ return {
 
         markdown = { "mdformat" },
 
+        javascript = { "prettier" },
+        html = { "prettier" },
+        css = { "prettier" },
+
         ["sh"] = { "shfmt" },
 
         yaml = { "yamlfmt" },

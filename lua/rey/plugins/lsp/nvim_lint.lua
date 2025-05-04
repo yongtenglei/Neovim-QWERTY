@@ -6,6 +6,9 @@ return {
       python = { "ruff", "bandit", "mypy" },
       markdown = { "markdownlint" },
       golang = { "golangcilint" },
+      javascript = { "eslint" },
+      html = { "eslint" },
+      css = { "stylelint" },
     }
 
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
