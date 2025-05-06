@@ -107,6 +107,7 @@ return {
     telescope.load_extension("fzf")
     telescope.load_extension("aerial")
     telescope.load_extension("xray23")
+    telescope.load_extension("frecency")
     telescope.load_extension("yank_history")
 
     local builtin = require("telescope.builtin")
@@ -133,6 +134,7 @@ return {
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-frecency.nvim", version = "*" },
     { "stevearc/aerial.nvim" },
     {
       "gbprod/yanky.nvim",

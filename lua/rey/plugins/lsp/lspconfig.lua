@@ -97,6 +97,7 @@ return {
       "cssls",
       "vuels",
       "dockerls",
+      "gopls",
       "golangci_lint_ls",
       "html",
       "jsonls",

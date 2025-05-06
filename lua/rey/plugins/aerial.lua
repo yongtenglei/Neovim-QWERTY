@@ -4,8 +4,14 @@ return {
     { "<leader>v", "<cmd>AerialToggle!<CR>", desc = "aerial" },
   },
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    "nvim-tree/nvim-web-devicons",
+    { "nvim-treesitter/nvim-treesitter" },
+    {
+      "echasnovski/mini.icons",
+      config = function()
+        require("mini.icons").mock_nvim_web_devicons()
+      end,
+      opts = {},
+    },
   },
   config = function()
     -- Call the setup function to change the default behavior
