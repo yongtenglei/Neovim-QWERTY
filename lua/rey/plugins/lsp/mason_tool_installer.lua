@@ -26,7 +26,6 @@ return {
 
         -- python
         { "black" },
-        { "pyright" },
         { "pylint" },
         { "isort" },
         { "mypy" },

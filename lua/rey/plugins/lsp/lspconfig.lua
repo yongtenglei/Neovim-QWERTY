@@ -2,93 +2,244 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    -- Improve LSPs UI
+    -- local icons = {
+    --   Class = " ",
+    --   Color = " ",
+    --   Constant = " ",
+    --   Constructor = " ",
+    --   Enum = " ",
+    --   EnumMember = " ",
+    --   Event = " ",
+    --   Field = " ",
+    --   File = " ",
+    --   Folder = " ",
+    --   Function = "󰊕 ",
+    --   Interface = " ",
+    --   Keyword = " ",
+    --   Method = "ƒ ",
+    --   Module = "󰏗 ",
+    --   Property = " ",
+    --   Snippet = " ",
+    --   Struct = " ",
+    --   Text = " ",
+    --   Unit = " ",
+    --   Value = " ",
+    --   Variable = " ",
+    -- }
+    --
+    -- local completion_kinds = vim.lsp.protocol.CompletionItemKind
+    -- for i, kind in ipairs(completion_kinds) do
+    --   completion_kinds[i] = icons[kind] and icons[kind] .. kind or kind
+    -- end
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-      vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    -- Diagnostics
+    local config = {
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "",
+          [vim.diagnostic.severity.WARN] = "",
+          [vim.diagnostic.severity.HINT] = "",
+          -- [vim.diagnostic.severity.HINT] = "",
+          [vim.diagnostic.severity.INFO] = "",
+        },
+      },
+      virtual_text = true,
+      update_in_insert = true,
+      underline = true,
+      severity_sort = true,
+      float = {
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+        suffix = "",
+      },
+    }
+    vim.diagnostic.config(config)
 
-    --------------------------------lspconfig-----------------------
-    local lspconfig = require("lspconfig")
-    local util = require("lspconfig/util")
+    -- Lsp capabilities and on_attach
+    -- Here we grab default Neovim capabilities and extend them with ones we want on top
+    print("lsp_init")
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-    -- Mappings.
-    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-    local opts = { noremap = true, silent = true }
-    vim.keymap.set("n", "<space>E", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-    vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = true,
+      lineFoldingOnly = true,
+    }
+    capabilities.textDocument.semanticTokens.multilineTokenSupport = true
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-    -- Use an on_attach function to only map the following keys
-    -- after the language server attaches to the current buffer
-    local on_attach = function(client, bufnr)
-      -- Hand formatting stuff to conform.nvim
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
+    -- capabilities from blink.cmp
+    capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
-      vim.lsp.inlay_hint.enable(true, { bufnr })
+    vim.lsp.config("*", {
+      capabilities = capabilities,
+      root_markers = { ".git" },
+    })
 
-      local signature_setup = {
-        --hint_prefix = "🐼 ",
-        --hint_prefix = "🐧 ",
-        --hint_prefix = "🦔 ",
-        hint_prefix = "🦫 ",
-      }
-
-      require("lsp_signature").on_attach(signature_setup, bufnr)
-
-      -- Enable completion triggered by <c-x><c-o>
-      vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-      -- telescope integration
-      telescope_builtin = require("telescope.builtin")
-
-      -- Mappings.
-      -- See `:help vim.lsp.*` for documentation on any of the below functions
-      local bufopts = { noremap = true, silent = true, buffer = bufnr }
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-      vim.keymap.set("n", "B", vim.lsp.buf.hover, bufopts)
-      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-      vim.keymap.set("n", "<C-b>", vim.lsp.buf.signature_help, bufopts)
-      vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-      vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-      vim.keymap.set("n", "<space>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end, bufopts)
-      vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-      vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-
-      require("tiny-code-action").setup({
-        -- backend = "vim",
-        backend = "delta",
-      })
-      vim.keymap.set("n", "<leader>ca", function()
-        require("tiny-code-action").code_action()
-      end, bufopts)
-      -- vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-
-      -- use telescope packer
-      --vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-      vim.keymap.set("n", "gr", telescope_builtin.lsp_references, bufopts)
-
-      vim.keymap.set("n", "<space>F", function()
-        vim.lsp.buf.format({ async = true })
-      end, bufopts)
+    -- Disable the default keybinds
+    for _, bind in ipairs({ "grn", "gra", "gri", "grr" }) do
+      pcall(vim.keymap.del, "n", bind)
     end
 
-    local lsp_flags = {
-      -- This is the default in Nvim 0.7+
-      debounce_text_changes = 150,
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(ev)
+        local bufnr = ev.buf
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if not client then
+          return
+        end
+
+        if client.server_capabilities.completionProvider then
+          vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+        end
+
+        if client.server_capabilities.definitionProvider then
+          vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+        end
+
+        -- -- nightly has inbuilt completions, this can replace all completion plugins
+        -- if client:supports_method("textDocument/completion", bufnr) then
+        --   -- Enable auto-completion
+        --   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+        -- end
+
+        --- Disable semantic tokens
+        client.server_capabilities.semanticTokensProvider = nil
+
+        -- Hand formatting stuff to conform.nvim
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+
+        --- Inlay hint
+        vim.lsp.inlay_hint.enable(true, { bufnr })
+
+        --- Signature
+        local signature_setup = {
+          --hint_prefix = "🐼 ",
+          --hint_prefix = "🐧 ",
+          --hint_prefix = "🦔 ",
+          hint_prefix = "🦫 ",
+        }
+        require("lsp_signature").on_attach(signature_setup, bufnr)
+
+        -- All the keymaps
+        -- Mappings.
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local keymap = vim.keymap.set
+        local lsp = vim.lsp
+        local opts = { noremap = true, silent = true }
+        local function opt(desc, others)
+          return vim.tbl_extend("force", opts, { desc = desc }, others or {})
+        end
+
+        vim.keymap.set("n", "<space>E", vim.diagnostic.open_float, opt())
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opt())
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opt())
+        vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opt())
+
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opt())
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opt())
+        vim.keymap.set("n", "B", vim.lsp.buf.hover, opt())
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opt())
+        vim.keymap.set("n", "<C-b>", vim.lsp.buf.signature_help, opt())
+
+        vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opt())
+        vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opt())
+        vim.keymap.set("n", "<space>wl", function()
+          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opt())
+        vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opt())
+        vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opt())
+        vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opt())
+
+        -- use telescope packer
+        local telescope_builtin = require("telescope.builtin")
+        vim.keymap.set("n", "gr", telescope_builtin.lsp_references, opt())
+        --vim.keymap.set("n", "gr", vim.lsp.buf.references, opt())
+
+        -- Handle it to conform.nvim
+        vim.keymap.set("n", "<space>F", function()
+          vim.lsp.buf.format({ async = true })
+        end, opt())
+      end,
+    })
+
+    -- Lua
+    vim.lsp.config.lua_ls = {
+      cmd = { "lua-language-server" },
+      filetypes = { "lua" },
+      root_markers = { ".luarc.json", ".git", vim.uv.cwd() },
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+        },
+      },
     }
 
-    local lsp_defaults = lspconfig.util.default_config
-    lsp_defaults.capabilities = vim.tbl_deep_extend("force", lsp_defaults.capabilities, capabilities)
+    -- Python
+    vim.lsp.config.basedpyright = {
+      name = "basedpyright",
+      filetypes = { "python" },
+      cmd = { "basedpyright-langserver", "--stdio" },
+      settings = {
+        basedpyright = {
+          disableOrganizeImports = true,
+          typeCheckingMode = "off",
+          analysis = {
+            autoSearchPaths = true,
+            autoImportCompletions = true,
+            useLibraryCodeForTypes = false,
+            diagnosticMode = "openFilesOnly",
+            inlayHints = {
+              variableTypes = true,
+              callArgumentNames = true,
+              functionReturnTypes = true,
+              genericTypes = false,
+            },
+          },
+        },
+      },
+    }
 
+    -- Rust
+    vim.lsp.config.rust_analyzer = {
+      filetypes = { "rust" },
+      cmd = { "rust-analyzer" },
+      settings = {
+        ["rust-analyzer"] = {
+          checkOnSave = true,
+          check = { command = "clippy", features = "all" },
+          assist = {
+            importGranularity = "module",
+            importPrefix = "self",
+          },
+          diagnostics = {
+            enable = true,
+            enableExperimental = true,
+          },
+          cargo = {
+            loadOutDirsFromCheck = true,
+            features = "all",
+          },
+          procMacro = {
+            enable = true,
+          },
+          inlayHints = {
+            chainingHints = true,
+            parameterHints = true,
+            typeHints = true,
+          },
+        },
+      },
+    }
+
+    -- servers
     local servers = {
       "clangd",
-      -- "pyright",
       "basedpyright",
       "ruff",
       "rust_analyzer",
@@ -106,77 +257,13 @@ return {
       "quick_lint_js",
       "texlab",
     }
-
-    for _, lsp in pairs(servers) do
-      if lsp == "lua_ls" then
-        lspconfig[lsp].setup({
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" },
-              },
-            },
-          },
-          on_attach = on_attach,
-          flags = lsp_flags,
-        })
-      elseif lsp == "basedpyright" then
-        lspconfig[lsp].setup({
-          settings = {
-            basedpyright = {
-              disableOrganizeImports = true,
-              typeCheckingMode = "off",
-              analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "openFilesOnly",
-                useLibraryCodeForTypes = false,
-              },
-            },
-          },
-          on_attach = on_attach,
-          flags = lsp_flags,
-        })
-      elseif lsp == "rust_analyzer" then
-        lspconfig[lsp].setup({
-          settings = {
-            ["rust-analyzer"] = {
-              checkOnSave = true,
-              check = { command = "clippy", features = "all" },
-              assist = {
-                importGranularity = "module",
-                importPrefix = "self",
-              },
-              diagnostics = {
-                enable = true,
-                enableExperimental = true,
-              },
-              cargo = {
-                loadOutDirsFromCheck = true,
-                features = "all", -- avoid error: file not included in crate hierarchy
-              },
-              procMacro = {
-                enable = true,
-              },
-              inlayHints = {
-                chainingHints = true,
-                parameterHints = true,
-                typeHints = true,
-              },
-            },
-          },
-          on_attach = on_attach,
-          flags = lsp_flags,
-        })
-      else
-        lspconfig[lsp].setup({
-          on_attach = on_attach,
-          flags = lsp_flags,
-        })
-      end
+    for _, server in ipairs(servers) do
+      vim.lsp.enable(server)
     end
   end,
   dependencies = {
     { "ray-x/lsp_signature.nvim" },
-    { "rachartier/tiny-code-action.nvim" },
+    { "nvim-telescope/telescope.nvim" },
+    { "saghen/blink.cmp" },
   },
 }

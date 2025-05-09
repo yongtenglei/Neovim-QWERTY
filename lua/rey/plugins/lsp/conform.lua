@@ -34,12 +34,6 @@ return {
         -- Only conform can take it!
         return { timeout_ms = 5000, lsp_fallback = false }
       end,
-
-      formatters = {
-        autopep8 = {
-          prepend_args = { "--max-line-length", "200" },
-        },
-      },
     })
 
     vim.api.nvim_create_user_command("FormatDisable", function(args)
