@@ -60,7 +60,6 @@ return {
 
     -- Lsp capabilities and on_attach
     -- Here we grab default Neovim capabilities and extend them with ones we want on top
-    print("lsp_init")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
     capabilities.textDocument.foldingRange = {
@@ -127,8 +126,6 @@ return {
         -- All the keymaps
         -- Mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local keymap = vim.keymap.set
-        local lsp = vim.lsp
         local opts = { noremap = true, silent = true }
         local function opt(desc, others)
           return vim.tbl_extend("force", opts, { desc = desc }, others or {})
@@ -233,6 +230,28 @@ return {
             parameterHints = true,
             typeHints = true,
           },
+        },
+      },
+    }
+
+    -- Gopls
+    vim.lsp.config.gopls = {
+      cmd = { "gopls" },
+      root_markers = { ".git", "go.mod", "go.work", vim.uv.cwd() },
+      filetypes = { "go", "gotempl", "gowork", "gomod" },
+      settings = {
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = {
+            unusedparams = true,
+          },
+        },
+        ["ui.inlayhint.hints"] = {
+          compositeLiteralFields = true,
+          constrantValues = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
         },
       },
     }
