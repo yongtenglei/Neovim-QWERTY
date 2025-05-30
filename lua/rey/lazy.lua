@@ -21,7 +21,8 @@ end
 
 require("lazy").setup({
   -- theme first :)
-  { import = "rey.plugins.themes.rose_pine" },
+  -- { import = "rey.plugins.themes.rose_pine" },
+  { import = "rey.plugins.themes.vague" },
   -- { import = "rey.plugins.themes.solarized" },
   -- { import = "rey.plugins.themes.ayu" },
   -- { import = "rey.plugins.themes.gruvbox" },
