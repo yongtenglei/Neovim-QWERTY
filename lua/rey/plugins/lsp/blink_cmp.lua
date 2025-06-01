@@ -2,18 +2,17 @@ return {
   "saghen/blink.cmp",
   dependencies = {
     { "rafamadriz/friendly-snippets" },
-    {
-      "echasnovski/mini.icons",
-      config = function()
-        require("mini.icons").mock_nvim_web_devicons()
-      end,
-      opts = {},
-    },
+    { "nvim-tree/nvim-web-devicons" },
     {
       "L3MON4D3/LuaSnip",
       version = "v2.*",
     },
     { "moyiz/blink-emoji.nvim" },
+    {
+      "samiulsami/cmp-go-deep",
+      dependencies = { "kkharji/sqlite.lua" },
+    },
+    { "saghen/blink.compat" },
   },
 
   version = "1.*",
@@ -99,7 +98,7 @@ return {
     },
 
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "emoji" },
+      default = { "lsp", "path", "snippets", "buffer", "emoji", "go_deep" },
       providers = {
         emoji = {
           module = "blink-emoji",
@@ -111,6 +110,50 @@ return {
           -- should_show_items = function()
           --   return vim.tbl_contains({ "gitcommit", "markdown" }, vim.o.filetype)
           -- end,
+        },
+        go_deep = {
+          name = "go_deep",
+          module = "blink.compat.source",
+          min_keyword_length = 3,
+          max_items = 5,
+          ---@module "cmp_go_deep"
+          ---@type cmp_go_deep.Options
+          opts = {
+            -- Enable/disable notifications.
+            notifications = true,
+
+            -- How to get documentation for Go symbols.
+            -- options:
+            -- "hover" - LSP 'textDocument/hover'. Prettier.
+            -- "regex" - faster and simpler.
+            get_documentation_implementation = "hover",
+
+            -- How to get the package names.
+            -- options:
+            -- "treesitter" - accurate but slower.
+            -- "regex" - faster but can fail in edge cases.
+            get_package_name_implementation = "regex",
+
+            -- Whether to exclude vendored packages from completions.
+            exclude_vendored_packages = false,
+
+            -- Timeout in milliseconds for fetching documentation.
+            -- Controls how long to wait for documentation to load.
+            documentation_wait_timeout_ms = 100,
+
+            -- Maximum time (in milliseconds) to wait before "locking-in" the current request and sending it to gopls.
+            debounce_gopls_requests_ms = 250,
+
+            -- Maximum time (in milliseconds) to wait before "locking-in" the current request and loading data from cache.
+            debounce_cache_requests_ms = 50,
+
+            -- Path to store the SQLite database
+            -- Default: "~/.local/share/nvim/cmp_go_deep.sqlite3"
+            db_path = vim.fn.stdpath("data") .. "/cmp_go_deep.sqlite3",
+
+            -- Maximum size for the SQLite database in bytes.
+            db_size_limit_bytes = 200 * 1024 * 1024, -- 200MB
+          },
         },
       },
     },

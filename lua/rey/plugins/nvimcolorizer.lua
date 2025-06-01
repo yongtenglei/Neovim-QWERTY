@@ -1,6 +1,5 @@
 return {
   "norcalli/nvim-colorizer.lua",
-  event = { "BufReadPre", "BufNewFile" },
   config = function()
     -- Use the `default_options` as the second parameter, which uses
     -- `foreground` for every mode. This is the inverse of the previous

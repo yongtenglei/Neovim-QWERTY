@@ -1,15 +1,8 @@
 return {
   "nvim-tree/nvim-tree.lua",
-  -- event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    {
-      "echasnovski/mini.icons",
-      config = function()
-        require("mini.icons").mock_nvim_web_devicons()
-      end,
-      opts = {},
-    },
-  },
+  version = "*",
+  lazy = false,
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     -- disable netrw at the very start of your init.lua (strongly advised)
     vim.g.loaded = 1

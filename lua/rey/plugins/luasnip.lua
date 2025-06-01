@@ -1,6 +1,5 @@
 return {
   "L3MON4D3/LuaSnip",
-  event = "InsertEnter",
   config = function()
     local luasnip_loader = require("luasnip.loaders.from_vscode")
     luasnip_loader.lazy_load()

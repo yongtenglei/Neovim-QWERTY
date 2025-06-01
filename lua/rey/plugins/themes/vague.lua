@@ -1,8 +1,10 @@
 return {
   "vague2k/vague.nvim",
+  lazy = false,
+  priority = 1000,
   config = function()
     require("vague").setup({
-      transparent = false, -- don't set background
+      transparent = true, -- set background
       style = {
         -- "none" is the same thing as default. But "italic" and "bold" are also valid options
         boolean = "bold",
@@ -85,5 +87,7 @@ return {
         delta = "#f3be7c",
       },
     })
+
+    vim.cmd("colorscheme vague")
   end,
 }

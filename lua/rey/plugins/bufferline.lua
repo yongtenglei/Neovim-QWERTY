@@ -1,14 +1,7 @@
 return {
   "akinsho/bufferline.nvim",
-  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    {
-      "echasnovski/mini.icons",
-      config = function()
-        require("mini.icons").mock_nvim_web_devicons()
-      end,
-      opts = {},
-    },
+    { "nvim-tree/nvim-web-devicons" },
   },
   config = function()
     local status, _ = pcall(require, "bufferline")

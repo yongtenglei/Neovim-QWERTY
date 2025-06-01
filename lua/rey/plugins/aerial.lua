@@ -5,13 +5,7 @@ return {
   },
   dependencies = {
     { "nvim-treesitter/nvim-treesitter" },
-    {
-      "echasnovski/mini.icons",
-      config = function()
-        require("mini.icons").mock_nvim_web_devicons()
-      end,
-      opts = {},
-    },
+    { "nvim-tree/nvim-web-devicons" },
   },
   config = function()
     -- Call the setup function to change the default behavior

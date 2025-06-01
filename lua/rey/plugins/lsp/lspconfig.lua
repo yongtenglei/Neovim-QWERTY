@@ -1,6 +1,5 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
   config = function()
     -- Improve LSPs UI
     -- local icons = {
