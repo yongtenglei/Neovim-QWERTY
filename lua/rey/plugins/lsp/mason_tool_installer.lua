@@ -44,13 +44,11 @@ return {
 
         -- sql
         { "sqlls" },
-        -- install sql_formatter manually
-        -- { "sql_formatter" },
+        { "sql_formatter" },
 
         -- front end
         { "quick_lint_js" },
         { "cssls" },
-        { "vuels" },
         { "html" },
 
         -- yaml
@@ -64,6 +62,13 @@ return {
         -- markdown
         { "mdformat" },
         { "markdownlint" },
+
+        -- latex
+        { "texlab" },
+
+        -- docker
+        { "dockerfile-language-server" },
+        { "docker-compose-language-service" },
       },
 
       auto_update = false,

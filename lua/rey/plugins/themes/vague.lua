@@ -16,7 +16,7 @@ return {
         functions = "none",
         headings = "bold",
         operators = "none",
-        strings = "italic",
+        strings = "none",
         variables = "none",
 
         -- keywords
