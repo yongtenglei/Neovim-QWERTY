@@ -8,6 +8,10 @@ return {
     },
     opts = {
       lsp_keymaps = false,
+      diagnostic = false,
+      golangci_lint = {
+        default = "standard",
+      },
     },
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
