@@ -1,96 +1,70 @@
---key disabled
-vim.keymap.set("n", "s", "<nop>")
-
-local opts = { noremap = true, silent = true }
-
-vim.g.mapleader = " "
-
-vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.lua <cr>", opts)
-
-vim.keymap.set("n", "=", "nzz", opts)
-vim.keymap.set("n", "-", "Nzz", opts)
-vim.keymap.set("n", "<leader><cr>", ":nohlsearch<cr>", opts)
-
--- quick esc
---vim.keymap.set("n", "<c-u>", ":w<enter>", opts)
---vim.keymap.set("i", "<c-u>", "<esc>", opts)
-vim.keymap.set("n", "L", "$", opts)
-vim.keymap.set("n", "H", "0", opts)
-
-vim.keymap.set("n", "K", "5k", opts)
-vim.keymap.set("n", "J", "5j", opts)
-
-vim.keymap.set("v", "K", "5k", opts)
-vim.keymap.set("v", "J", "5j", opts)
-
+vim.keymap.set("n", "<leader>rc", ":e ~/.config/nvim/init.lua <cr>", { desc = "Source config file" })
+vim.keymap.set("n", "<leader>sc", ":set spell!<cr>", { desc = "Spell check" })
+vim.keymap.set("n", "=", "nzz", { desc = "Next search" })
+vim.keymap.set("n", "-", "Nzz", { desc = "Previous Search" })
+vim.keymap.set("n", "<leader><cr>", ":nohlsearch<cr>", { desc = "No highlight search" })
+vim.keymap.set("n", "L", "$", { desc = "End of line" })
+vim.keymap.set("n", "H", "0", { desc = "Start of line" })
+vim.keymap.set("n", "K", "5k", { desc = "5k" })
+vim.keymap.set("n", "J", "5j", { desc = "5j" })
+vim.keymap.set("v", "K", "5k", { desc = "5k" })
+vim.keymap.set("v", "J", "5j", { desc = "5j" })
 vim.keymap.set("n", ";", ":")
-vim.keymap.set("n", "Q", ":q!<enter>", opts)
-vim.keymap.set("v", "Y", '"+y', opts)
-vim.keymap.set("n", "<", "<<", opts)
-vim.keymap.set("n", ">", ">>", opts)
-vim.keymap.set("n", "<leader>o", "za", opts)
+vim.keymap.set("n", "Q", ":q!<enter>", { desc = "Quick exit" })
 
-vim.keymap.set("n", "<leader><leader>", "<Esc>/<++><CR>:nohlsearch<CR>4xa", opts)
-vim.keymap.set("n", "<leader>sc", ":set spell!<cr>", opts)
-vim.keymap.set("n", "<leader>sw", ":set wrap<cr>", opts)
-
+-- Indent
+vim.keymap.set("n", "<", "<<", { desc = "Indent" })
+vim.keymap.set("n", ">", ">>", { desc = "Deindent" })
 -- Stay in indent mode when you indent code
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
+vim.keymap.set("v", "<", "<gv", { desc = "Indent" })
+vim.keymap.set("v", ">", ">gv", { desc = "Deindent" })
 -- Move text up and down
-vim.keymap.set("v", "<A-down>", ":m '>+1<CR>gv=gv", opts)
-vim.keymap.set("v", "<A-up>", ":m '<-2<CR>gv=gv", opts)
--- replace what you highlight
-vim.keymap.set("v", "p", '"_dP', opts)
+vim.keymap.set("v", "<A-down>", ":m '>+1<CR>gv=gv", { desc = "Move text up" })
+vim.keymap.set("v", "<A-up>", ":m '<-2<CR>gv=gv", { desc = "Move text down" })
 
--- split screen
-vim.keymap.set("n", "sk", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", opts)
-vim.keymap.set("n", "sj", ":set splitbelow<CR>:split<CR>", opts)
-vim.keymap.set("n", "sh", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", opts)
-vim.keymap.set("n", "sl", ":set splitright<CR>:vsplit<CR>", opts)
--- cursor jumper between screen
-vim.keymap.set("n", "<leader>ww", "<c-w>W", opts)
-vim.keymap.set("n", "<leader>l", "<c-w>l", opts)
-vim.keymap.set("n", "<leader>k", "<c-w>k", opts)
-vim.keymap.set("n", "<leader>h", "<c-w>h", opts)
-vim.keymap.set("n", "<leader>j", "<c-w>j", opts)
-vim.keymap.set("n", "qf", "<c-w>o", opts)
+-- Split screen
+vim.keymap.set("n", "sk", ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", { desc = "Split horizontally" })
+vim.keymap.set("n", "sj", ":set splitbelow<CR>:split<CR>", { desc = "Split horizontally" })
+vim.keymap.set("n", "sh", ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", { desc = "" })
+vim.keymap.set("n", "sl", ":set splitright<CR>:vsplit<CR>", { desc = "" })
+-- Rotate window
+vim.keymap.set("n", "srh", "<C-w>b<C-w>K", { desc = "" })
+vim.keymap.set("n", "srv", "<C-w>b<C-w>H", { desc = "" })
 
--- set split screen preference
-vim.keymap.set("n", "sv", "<C-w>t<C-w>H", opts)
-vim.keymap.set("n", "sh", "<C-w>t<C-w>K", opts)
--- rotate screen
-vim.keymap.set("n", "srh", "<C-w>b<C-w>K", opts)
-vim.keymap.set("n", "srv", "<C-w>b<C-w>H", opts)
+-- Adjust window size
+vim.keymap.set("n", "<up>", ":res +5<cr>", { desc = "" })
+vim.keymap.set("n", "<down>", ":res -5<cr>", { desc = "" })
+vim.keymap.set("n", "<left>", ":vertical resize+5<cr>", { desc = "" })
+vim.keymap.set("n", "<right>", ":vertical resize-5<cr>", { desc = "" })
 
--- adjust window size
-vim.keymap.set("n", "<up>", ":res +5<cr>", opts)
-vim.keymap.set("n", "<down>", ":res -5<cr>", opts)
-vim.keymap.set("n", "<left>", ":vertical resize+5<cr>", opts)
-vim.keymap.set("n", "<right>", ":vertical resize-5<cr>", opts)
+-- Tab management
+vim.keymap.set("n", "ti", ":tabe<cr>", { desc = "" })
+vim.keymap.set("n", "th", ":-tabnext<cr>", { desc = "" })
+vim.keymap.set("n", "tl", ":+tabnext<cr>", { desc = "" })
+-- Move tabs
+vim.keymap.set("n", "tmh", ":-tabmove<cr>", { desc = "" })
+vim.keymap.set("n", "tml", ":+tabmove<cr>", { desc = "" })
 
--- tab management
-vim.keymap.set("n", "ti", ":tabe<cr>", opts)
-vim.keymap.set("n", "th", ":-tabnext<cr>", opts)
-vim.keymap.set("n", "tl", ":+tabnext<cr>", opts)
--- move tabs
-vim.keymap.set("n", "tmh", ":-tabmove<cr>", opts)
-vim.keymap.set("n", "tml", ":+tabmove<cr>", opts)
+-- Buffer switcher
+vim.keymap.set("n", "bh", ":bp<cr>", { desc = "" })
+vim.keymap.set("n", "bl", ":bn<cr>", { desc = "" })
 
--- buffer switcher
-vim.keymap.set("n", "bh", ":bp<cr>", opts)
-vim.keymap.set("n", "bl", ":bn<cr>", opts)
+-- Terminal enhancement
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- quickfix and location fix
-vim.keymap.set("n", "co", ":copen<cr>", opts)
-vim.keymap.set("n", "cm", ":cnext<cr>", opts)
-vim.keymap.set("n", "ck", ":cprevious<cr>", opts)
-vim.keymap.set("n", "cc", ":cclose<cr>", opts)
+-- Diagnostic keymaps
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
-vim.keymap.set("n", "zo", ":lopen<cr>", opts)
-vim.keymap.set("n", "zm", ":lnext<cr>", opts)
-vim.keymap.set("n", "zk", ":lprevious<cr>", opts)
-vim.keymap.set("n", "zc", ":lclose<cr>", opts)
+--  Use leader+<hjkl> to switch between windows
+vim.keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<leader>k", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- terminal enhancement
-vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("yank-highlight", { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})

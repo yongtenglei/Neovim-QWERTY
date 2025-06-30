@@ -1,50 +1,67 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    error("Error cloning lazy.nvim:\n" .. out)
+  end
 end
-vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
-
--- Use a protected call so we don't error out on first use
-local status_ok, lazy = pcall(require, "lazy")
-if not status_ok then
-  return
-end
+---@type vim.Option
+local rtp = vim.opt.rtp
+rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- theme first :)
-  -- { import = "rey.plugins.themes.rose_pine" },
-  { import = "rey.plugins.themes.vague" },
-  -- { import = "rey.plugins.themes.solarized" },
-  -- { import = "rey.plugins.themes.ayu" },
-  -- { import = "rey.plugins.themes.gruvbox" },
-  -- { import = "rey.plugins.themes.kanagawa" },
-  -- { import = "rey.plugins.themes.catppuccin" },
+  require("rey.plugins.guess-indent"),
+  require("rey.plugins.gitsigns"),
+  require("rey.plugins.which-key"),
+  require("rey.plugins.telescope"),
+  require("rey.plugins.lspconfig"),
+  require("rey.plugins.conform"),
+  require("rey.plugins.blink-cmp"),
 
-  { import = "rey.plugins" },
-  { import = "rey.plugins.lsp" },
-  { import = "rey.plugins.ui" },
-  { import = "rey.plugins.mini" },
-  { import = "rey.plugins.snacks" },
-  { import = "rey.plugins.languages.markdown" },
-  { import = "rey.plugins.languages.golang" },
+  require("rey.plugins.themes.vague"),
+  -- require("rey.plugins.themes.tokyonight"),
+
+  require("rey.plugins.todo-comments"),
+  require("rey.plugins.mini"),
+  require("rey.plugins.treesitter"),
+
+  require("rey.plugins.debug"),
+  require("rey.plugins.indent_line"),
+  require("rey.plugins.lint"),
+
+  require("rey.plugins.tree"),
+  require("rey.plugins.snacks"),
+  require("rey.plugins.aerial"),
+  require("rey.plugins.ui"),
+  require("rey.plugins.visual-multi"),
+  require("rey.plugins.toggle-term"),
+  require("rey.plugins.nvim-surround"),
+  require("rey.plugins.preview"),
+  require("rey.plugins.life-quality"),
+  require("rey.plugins.harpoon"),
+  require("rey.plugins.gitignore"),
+  require("rey.plugins.just-for-fun"),
+
+  require("rey.plugins.languages.golang.go"),
+  require("rey.plugins.languages.markdown.markdown"),
 }, {
-  checker = {
-    enabled = true,
-    notify = false,
-  },
-  change_detection = {
-    notify = false,
-  },
-  rocks = {
-    hererocks = true,
+  ui = {
+    icons = vim.g.have_nerd_font and {} or {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      require = "🌙",
+      source = "📄",
+      start = "🚀",
+      task = "📌",
+      lazy = "💤 ",
+    },
   },
 })
