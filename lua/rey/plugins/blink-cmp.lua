@@ -77,7 +77,7 @@ return {
       },
 
       completion = {
-        trigger = { show_in_snippet = false },
+        trigger = { show_in_snippet = true },
         keyword = { range = "full" },
         accept = { auto_brackets = { enabled = true } },
         documentation = {

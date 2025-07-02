@@ -20,6 +20,8 @@ return {
         "go",
         "gomod",
         "gosum",
+        "gowork",
+        "comment",
         "gotmpl",
         "html",
         "json",

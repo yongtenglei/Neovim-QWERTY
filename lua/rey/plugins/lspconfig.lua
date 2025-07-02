@@ -23,6 +23,11 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
         callback = function(event)
+          -- Disable the default keybinds
+          for _, bind in ipairs({ "grn", "gra", "gri", "grr" }) do
+            pcall(vim.keymap.del, "n", bind)
+          end
+
           local map = function(keys, func, desc, mode)
             mode = mode or "n"
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
@@ -32,11 +37,11 @@ return {
           map("<space>E", vim.diagnostic.open_float, "Diaglostic Float Window")
           map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
           map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
-          map("<leader>r", require("telescope.builtin").lsp_references, "Goto [R]eferences")
-          map("<leader>i", require("telescope.builtin").lsp_implementations, "Goto [I]mplementation")
 
-          map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
           map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+          map("gi", require("telescope.builtin").lsp_implementations, "Goto [I]mplementation")
+          map("gr", require("telescope.builtin").lsp_references, "Goto [R]eferences")
+          map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
           map("gt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
 
           map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
@@ -55,6 +60,21 @@ return {
             end
           end
 
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          if client and client.server_capabilities.completionProvider then
+            vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+          end
+
+          if client and client.server_capabilities.definitionProvider then
+            vim.bo[event.buf].tagfunc = "v:lua.vim.lsp.tagfunc"
+          end
+
+          --- Disable semantic tokens
+          if client and client.server_capabilities.semanticTokensProvider then
+            client.server_capabilities.semanticTokensProvider = nil
+          end
+
           --- Signature
           local signature_setup = {
             --hint_prefix = "🐼 ",
@@ -64,7 +84,11 @@ return {
           }
           require("lsp_signature").on_attach(signature_setup, event.buf)
 
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          -- Hand formatting stuff to conform.nvim
+          if client then
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end
 
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
@@ -93,16 +117,9 @@ return {
             --- Inlay hint
             vim.lsp.inlay_hint.enable(true, { event.buf })
 
-            require("lsp_signature").on_attach(signature_setup, event.buf)
             map("<leader>th", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "[T]oggle Inlay [H]ints")
-          end
-
-          -- Hand formatting stuff to conform.nvim
-          if client then
-            client.server_capabilities.documentFormattingProvider = false
-            client.server_capabilities.documentRangeFormattingProvider = false
           end
         end,
       })

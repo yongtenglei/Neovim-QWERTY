@@ -1,15 +1,13 @@
 return {
   {
     "iamcco/markdown-preview.nvim",
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = ":call mkdp#util#install()",
     dependencies = {
       { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
       { "godlygeek/tabular", ft = { "markdown" } },
     },
     ft = { "markdown" },
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     config = function()
       -- if do not work in .md file, please do `:call mkdp#util#install()`
       -- do not auto preview

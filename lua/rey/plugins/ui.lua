@@ -4,10 +4,13 @@ return {
     config = function()
       require("modes").setup({
         colors = {
-          bg = "", -- Optional bg param, defaults to Normal hl group
+          bg = "",
           copy = "#f5c359",
           delete = "#c75c6a",
+          change = "#c75c6a",
+          format = "#c79585",
           insert = "#78ccc5",
+          replace = "#245361",
           visual = "#9745be",
         },
 
@@ -142,7 +145,8 @@ return {
         options = {
           icons_enabled = true,
           theme = "auto",
-          component_separators = { left = "", right = "" },
+          -- component_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {},
           always_divide_middle = true,
@@ -155,15 +159,31 @@ return {
               "filename",
               file_status = true,
               path = 3,
+              component_separators = {},
+              section_separators = {},
               symbols = {
-                modified = "[+]", -- Text to show when the file is modified.
-                readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
-                unnamed = "[No Name]", -- Text to show for unnamed buffers.
-                newfile = "[New]", -- Text to show for new created file before first writting
+                modified = "[+]",
+                readonly = "[-]",
+                unnamed = "[No Name]",
+                newfile = "[New]",
               },
             },
           },
-          lualine_x = { "encoding", "fileformat", "filetype", "rest" },
+          lualine_x = {
+            {
+              "harpoon2",
+              icon = "⚓:",
+              indicators = { "🦡", "🦎", "🐋", "🐲" },
+              active_indicators = { "[🦨]", "[🦖]", "[🐳]", "[🐉]" },
+              color_active = {},
+              _separator = " ♥ ",
+              no_harpoon = "⚓",
+            },
+            "%=",
+            "encoding",
+            "fileformat",
+            "filetype",
+          },
           lualine_y = { "progress" },
           lualine_z = { "location" },
         },
@@ -175,9 +195,18 @@ return {
           lualine_y = {},
           lualine_z = {},
         },
-        extensions = { "fzf", "quickfix", "nvim-tree", "nvim-dap-ui", "aerial" },
+        extensions = { "oil", "quickfix", "nvim-tree", "nvim-dap-ui", "aerial", "mason", "toggleterm" },
       })
     end,
+  },
+  {
+    "letieu/harpoon-lualine",
+    dependencies = {
+      {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+      },
+    },
   },
   {
     "akinsho/bufferline.nvim",

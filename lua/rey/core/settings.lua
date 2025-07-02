@@ -52,6 +52,12 @@ vim.o.confirm = true
 
 vim.opt.guifont = "CaskaydiaCove Nerd Font Mono:h12"
 
+vim.opt.guicursor = {
+  "n-v-c:block-Cursor/lCursor-blinkwait1000-blinkon1000-blinkoff1000",
+  "i-ci:ver1-Cursor/lCursor-blinkwait1000-blinkon1000-blinkoff1000",
+  "r:hor50-Cursor/lCursor-blinkwait100-blinkon100-blinkoff100",
+}
+
 -- Disables automatic commenting on newline
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "*" },
