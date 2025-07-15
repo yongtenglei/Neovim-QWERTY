@@ -117,13 +117,16 @@ return {
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
       vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
+      vim.keymap.set("n", "<leader>fF", ":Telescope frecency workspace=CWD<cr>", { desc = "[F]ind files via [F]recency" })
       vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[F]ind [S]elect Telescope" })
       vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
       vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume" })
       vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
       vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "[F]ind Recent Files" })
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[ ] Find existing buffers" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing buffers" })
+      vim.keymap.set("n", "<leader>fv", ":Telescope aerial<cr>", { desc = "[F]ind aerial symbol" })
+      vim.keymap.set("n", "<leader>fy", ":Telescope yank_history<cr>", { desc = "[F]ind [y]ank history" })
 
       vim.keymap.set("n", "<leader>/", function()
         builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -137,11 +140,11 @@ return {
           grep_open_files = true,
           prompt_title = "Live Grep in Open Files",
         })
-      end, { desc = "[S]earch [/] in Open Files" })
+      end, { desc = "[F]ind [/] in Open Files" })
 
       vim.keymap.set("n", "<leader>fn", function()
         builtin.find_files({ cwd = vim.fn.stdpath("config") })
-      end, { desc = "[S]earch [N]eovim files" })
+      end, { desc = "[F]ind [N]eovim files" })
     end,
   },
 }

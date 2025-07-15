@@ -56,6 +56,7 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 --  Use leader+<hjkl> to switch between windows
+vim.keymap.set("n", "<leader>ww", "<C-w>w", { desc = "Move focus to another window" })
 vim.keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Move focus to the lower window" })
@@ -66,5 +67,55 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("yank-highlight", { clear = true }),
   callback = function()
     vim.hl.on_yank()
+  end,
+})
+
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+  if args.bang then
+    vim.b.disable_autoformat = true
+  else
+    vim.g.disable_autoformat = true
+  end
+end, {
+  desc = "Disable autoformat-on-save",
+  bang = true,
+})
+
+vim.api.nvim_create_user_command("FormatEnable", function()
+  vim.b.disable_autoformat = false
+  vim.g.disable_autoformat = false
+end, {
+  desc = "Re-enable autoformat-on-save",
+})
+
+vim.keymap.set("n", "<leader>ef", ":FormatEnable<cr>", { desc = "[E]nable [F]ormat" })
+vim.keymap.set("n", "<leader>df", ":FormatDisable<cr>", { desc = "[D]isable [F]ormat" })
+
+local function trim_trailing_whitespace()
+  local view = vim.fn.winsaveview()
+  vim.cmd([[keeppatterns %s/\s\+$//e]])
+  vim.fn.winrestview(view)
+end
+
+vim.api.nvim_create_user_command("TrimWhitespace", function()
+  trim_trailing_whitespace()
+end, {})
+
+
+local skip_trimming_trailing_whitespace_filetypes = {
+  mail = true,
+  markdown = true,
+  gitcommit = true,
+  text = true,
+  help = true,
+  [''] = true
+}
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    if not vim.bo.binary and not skip_trimming_trailing_whitespace_filetypes[vim.bo.filetype] then
+      trim_trailing_whitespace()
+    end
   end,
 })

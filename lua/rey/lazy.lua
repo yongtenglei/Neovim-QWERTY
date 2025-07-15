@@ -16,12 +16,15 @@ require("lazy").setup({
   require("rey.plugins.gitsigns"),
   require("rey.plugins.which-key"),
   require("rey.plugins.telescope"),
+
+  require("rey.plugins.languages.python.whichpy"),
   require("rey.plugins.lspconfig"),
   require("rey.plugins.conform"),
   require("rey.plugins.blink-cmp"),
 
-  require("rey.plugins.themes.vague"),
-  -- require("rey.plugins.themes.tokyonight"),
+  --  require("rey.plugins.themes.everforest"),
+  -- require("rey.plugins.themes.vague"),
+  require("rey.plugins.themes.tokyonight"),
 
   require("rey.plugins.todo-comments"),
   require("rey.plugins.mini"),

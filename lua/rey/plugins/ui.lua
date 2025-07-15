@@ -180,6 +180,7 @@ return {
               no_harpoon = "⚓",
             },
             "%=",
+            "whichpy",
             "encoding",
             "fileformat",
             "filetype",

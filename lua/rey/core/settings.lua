@@ -12,6 +12,7 @@ end)
 vim.o.breakindent = true
 
 vim.o.undofile = true
+vim.o.undodir = vim.fn.expand("~/.config/nvim/.tmp/undo")
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -50,7 +51,8 @@ vim.o.scrolloff = 99
 
 vim.o.confirm = true
 
-vim.opt.guifont = "CaskaydiaCove Nerd Font Mono:h12"
+-- vim.opt.guifont = "CaskaydiaCove Nerd Font Mono:h12"
+vim.opt.guifont = "Maple Mono NF:h12"
 
 vim.opt.guicursor = {
   "n-v-c:block-Cursor/lCursor-blinkwait1000-blinkon1000-blinkoff1000",
