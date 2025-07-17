@@ -247,6 +247,7 @@ return {
         -- docker
         { "dockerfile-language-server" },
         { "docker-compose-language-service" },
+        { "hadolint" },
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

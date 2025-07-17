@@ -51,6 +51,8 @@ vim.o.scrolloff = 99
 
 vim.o.confirm = true
 
+vim.o.swapfile = false
+
 -- vim.opt.guifont = "CaskaydiaCove Nerd Font Mono:h12"
 vim.opt.guifont = "Maple Mono NF:h12"
 
