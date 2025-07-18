@@ -33,7 +33,13 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          map("B", vim.lsp.buf.hover, "Documentation")
+          map("B", function()
+            vim.lsp.buf.hover({
+              border = "rounded",
+              max_height = math.floor(vim.o.lines * 0.3),
+              max_width = math.floor(vim.o.columns * 0.4),
+            })
+          end, "Documentation")
           map("<space>E", vim.diagnostic.open_float, "Diaglostic Float Window")
           map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
           map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
