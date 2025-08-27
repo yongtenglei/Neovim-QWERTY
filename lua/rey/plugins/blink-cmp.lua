@@ -1,5 +1,24 @@
 return {
   {
+    "github/copilot.vim",
+    cmd = "Copilot",
+    event = "BufWinEnter",
+    init = function()
+      vim.g.copilot_no_maps = true
+    end,
+    config = function()
+      -- Block the normal Copilot suggestions
+      vim.api.nvim_create_augroup("github_copilot", { clear = true })
+      vim.api.nvim_create_autocmd({ "FileType", "BufUnload" }, {
+        group = "github_copilot",
+        callback = function(args)
+          vim.fn["copilot#On" .. args.event]()
+        end,
+      })
+      vim.fn["copilot#OnFileType"]()
+    end,
+  },
+  {
     "saghen/blink.cmp",
     event = "VimEnter",
     version = "1.*",
@@ -38,6 +57,7 @@ return {
       },
       { "saghen/blink.compat" },
       { "onsails/lspkind.nvim" },
+      { "fang2hou/blink-copilot" },
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -125,7 +145,6 @@ return {
                 end,
               },
               kind = {
-
                 highlight = function(ctx)
                   local hl = ctx.kind_hl
                   if vim.tbl_contains({ "Path" }, ctx.source_name) then
@@ -143,7 +162,7 @@ return {
       },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "lazydev", "emoji", "go_deep", "go_pkgs" },
+        default = { "lsp", "path", "snippets", "buffer", "lazydev", "emoji", "go_deep", "go_pkgs", "copilot" },
         providers = {
           lazydev = {
             module = "lazydev.integrations.blink",
@@ -207,6 +226,12 @@ return {
           go_pkgs = {
             module = "blink-go-import",
             name = "Import",
+          },
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
+            score_offset = 100,
+            async = true,
           },
         },
       },
